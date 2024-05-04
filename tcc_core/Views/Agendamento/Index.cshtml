@@ -1,0 +1,95 @@
+﻿@model IEnumerable<tcc_core.Models.Agendamento>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RespInterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RespExterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Turma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Feedback)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observacoes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DtInicial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DtFinal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtdPessoas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projeto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RespInterno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RespExterno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Turma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Feedback)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observacoes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtInicial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QtdPessoas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Projeto.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
