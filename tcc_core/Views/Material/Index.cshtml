@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<tcc_core.Models.Material>
 
 @{
-    ViewData["Title"] = "Usuario";
+    ViewData["Title"] = "Materiais";
 }
 
-<h1>Usuário</h1>
+<h1>@ViewData["Title"]</h1>
+<hr />
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Adicionar</a>
 </p>
 <table class="table">
     <thead>
@@ -36,10 +37,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.QuantidadeAtual)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+             <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Ver detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Excluir</a>
             </td>
         </tr>
 }

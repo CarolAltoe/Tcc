@@ -1,12 +1,12 @@
 ﻿@model tcc_core.Models.Movimentacao
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Movimentação";
 }
 
-<h1>Edit</h1>
 
-<h4>Movimentacao</h4>
+<h1>@ViewData["Title"]</h1>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -38,16 +38,15 @@
                 <select asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId"></select>
                 <span asp-validation-for="ProjetoId" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-success" /> |
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

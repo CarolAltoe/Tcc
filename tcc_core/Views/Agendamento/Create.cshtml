@@ -1,13 +1,12 @@
 ﻿@model tcc_core.Models.Agendamento
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cadastar Agendamento";
 }
 
-<h1>Create</h1>
-
-<h4>Agendamento</h4>
+<h1>@ViewData["Title"]</h1>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -65,15 +64,13 @@
                 <label asp-for="UsuarioId" class="control-label"></label>
                 <select asp-for="UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Cadastrar" class="btn btn-success" /> |
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
