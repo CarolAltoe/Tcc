@@ -22,20 +22,20 @@ namespace tcc_core.Controllers
         // GET: Projeto
         public async Task<IActionResult> Index()
         {
-              return _context.Projetos != null ? 
-                          View(await _context.Projetos.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Projetos'  is null.");
+              return _context.Projeto != null ? 
+                          View(await _context.Projeto.ToListAsync()) :
+                          Problem("Entity set 'AppDbContext.Projeto'  is null.");
         }
 
         // GET: Projeto/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Projetos == null)
+            if (id == null || _context.Projeto == null)
             {
                 return NotFound();
             }
 
-            var projeto = await _context.Projetos
+            var projeto = await _context.Projeto
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (projeto == null)
             {
@@ -70,12 +70,12 @@ namespace tcc_core.Controllers
         // GET: Projeto/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Projetos == null)
+            if (id == null || _context.Projeto == null)
             {
                 return NotFound();
             }
 
-            var projeto = await _context.Projetos.FindAsync(id);
+            var projeto = await _context.Projeto.FindAsync(id);
             if (projeto == null)
             {
                 return NotFound();
@@ -121,12 +121,12 @@ namespace tcc_core.Controllers
         // GET: Projeto/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Projetos == null)
+            if (id == null || _context.Projeto == null)
             {
                 return NotFound();
             }
 
-            var projeto = await _context.Projetos
+            var projeto = await _context.Projeto
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (projeto == null)
             {
@@ -141,14 +141,14 @@ namespace tcc_core.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Projetos == null)
+            if (_context.Projeto == null)
             {
-                return Problem("Entity set 'AppDbContext.Projetos'  is null.");
+                return Problem("Entity set 'AppDbContext.Projeto'  is null.");
             }
-            var projeto = await _context.Projetos.FindAsync(id);
+            var projeto = await _context.Projeto.FindAsync(id);
             if (projeto != null)
             {
-                _context.Projetos.Remove(projeto);
+                _context.Projeto.Remove(projeto);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +157,7 @@ namespace tcc_core.Controllers
 
         private bool ProjetoExists(int id)
         {
-          return (_context.Projetos?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Projeto?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

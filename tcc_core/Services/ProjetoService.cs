@@ -1,66 +1,68 @@
-﻿using Microsoft.EntityFrameworkCore;
-using tcc_core.Models;
+﻿using tcc_core.Data;
 using tcc_core.Interfaces;
-using tcc_core.Data;
+using tcc_core.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace tcc_core.Services
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class ProjetoService : IProjetoService
     {
         private readonly AppDbContext _context;
 
-        public UsuarioRepository(AppDbContext context)
+        public ProjetoService(AppDbContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Usuario> GetAllUsuarios()
+        public IEnumerable<Projeto> GetAllProjeto()
         {
-            return _context.Usuarios.ToList();
+            return _context.Projeto.ToList();
         }
 
-        public Usuario GetUsuarioById(int id)
+        public Projeto GetProjetoById(int id)
         {
-            return _context.Usuarios.Find(id);
+            return _context.Projeto.Find(id);
         }
 
-        public Usuario CreateUsuario(Usuario usuario)
+        public Projeto CreateProjeto(Projeto projeto)
         {
-            if (usuario == null)
+            if (projeto == null)
             {
-                throw new ArgumentNullException(nameof(usuario));
+                throw new ArgumentNullException(nameof(projeto));
             }
 
-            _context.Usuarios.Add(usuario);
+            _context.Projeto.Add(projeto);
             _context.SaveChanges();
-            return usuario;
+            return projeto;
         }
 
-        public Usuario UpdateUsuario(int id, Usuario usuario)
+        public Projeto UpdateProjeto(int id, Projeto projeto)
         {
-            if (id != usuario.Id)
+            if (id != projeto.Id)
             {
-                throw new ArgumentException("ID do usuário não corresponde.");
+                throw new ArgumentException("ID do projeto não corresponde.");
             }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            _context.Entry(projeto).State = EntityState.Modified;
             _context.SaveChanges();
-            return usuario;
+            return projeto;
         }
 
-        public void DeleteUsuario(int id)
+        public void DeleteProjeto(int id)
         {
-            var usuario = _context.Usuarios.Find(id);
-            if (usuario == null)
+            var projeto = _context.Projeto.Find(id);
+            if (projeto == null)
             {
-                throw new ArgumentException("Usuário não encontrado.");
+                throw new ArgumentException("Projeto não encontrado.");
             }
 
-            _context.Usuarios.Remove(usuario);
+            _context.Projeto.Remove(projeto);
             _context.SaveChanges();
         }
     }
 }
+
 
 /*
  

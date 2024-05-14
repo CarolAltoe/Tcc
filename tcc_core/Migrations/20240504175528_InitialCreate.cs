@@ -16,7 +16,7 @@ namespace tcc_core.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Materiais",
+                name: "Material",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -27,12 +27,12 @@ namespace tcc_core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Materiais", x => x.Id);
+                    table.PrimaryKey("PK_Material", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Projetos",
+                name: "Projeto",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -44,12 +44,12 @@ namespace tcc_core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Projetos", x => x.Id);
+                    table.PrimaryKey("PK_Projeto", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Usuarios",
+                name: "Usuario",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -60,18 +60,18 @@ namespace tcc_core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                    table.PrimaryKey("PK_Usuario", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Agendamentos",
+                name: "Agendamento",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    RespInterno = table.Column<string>(type: "longtext", nullable: false),
-                    RespExterno = table.Column<string>(type: "longtext", nullable: false),
+                    ResponsavelInterno = table.Column<string>(type: "longtext", nullable: false),
+                    ResponsavelExterno = table.Column<string>(type: "longtext", nullable: false),
                     Turma = table.Column<string>(type: "longtext", nullable: false),
                     Descricao = table.Column<string>(type: "longtext", nullable: false),
                     Feedback = table.Column<string>(type: "longtext", nullable: false),
@@ -84,29 +84,29 @@ namespace tcc_core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Agendamentos", x => x.Id);
+                    table.PrimaryKey("PK_Agendamento", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Agendamentos_Projetos_ProjetoId",
+                        name: "FK_Agendamento_Projeto_ProjetoId",
                         column: x => x.ProjetoId,
-                        principalTable: "Projetos",
+                        principalTable: "Projeto",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Agendamentos_Usuarios_UsuarioId",
+                        name: "FK_Agendamento_Usuario_UsuarioId",
                         column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
+                        principalTable: "Usuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Movimentacoes",
+                name: "Movimentacao",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Responsavel = table.Column<string>(type: "longtext", nullable: false),
+                    Responsavelonsavel = table.Column<string>(type: "longtext", nullable: false),
                     TipoMovimentacao = table.Column<string>(type: "longtext", nullable: false),
                     DtMovimentacao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
@@ -114,24 +114,24 @@ namespace tcc_core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movimentacoes", x => x.Id);
+                    table.PrimaryKey("PK_Movimentacao", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Movimentacoes_Projetos_ProjetoId",
+                        name: "FK_Movimentacao_Projeto_ProjetoId",
                         column: x => x.ProjetoId,
-                        principalTable: "Projetos",
+                        principalTable: "Projeto",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Movimentacoes_Usuarios_UsuarioId",
+                        name: "FK_Movimentacao_Usuario_UsuarioId",
                         column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
+                        principalTable: "Usuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "MovimentacoesMateriais",
+                name: "MovimentacaoMaterial",
                 columns: table => new
                 {
                     MovimentacaoId = table.Column<int>(type: "int", nullable: false),
@@ -140,45 +140,45 @@ namespace tcc_core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovimentacoesMateriais", x => new { x.MovimentacaoId, x.MaterialId });
+                    table.PrimaryKey("PK_MovimentacaoMaterial", x => new { x.MovimentacaoId, x.MaterialId });
                     table.ForeignKey(
-                        name: "FK_MovimentacoesMateriais_Materiais_MaterialId",
+                        name: "FK_MovimentacaoMaterial_Material_MaterialId",
                         column: x => x.MaterialId,
-                        principalTable: "Materiais",
+                        principalTable: "Material",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MovimentacoesMateriais_Movimentacoes_MovimentacaoId",
+                        name: "FK_MovimentacaoMaterial_Movimentacao_MovimentacaoId",
                         column: x => x.MovimentacaoId,
-                        principalTable: "Movimentacoes",
+                        principalTable: "Movimentacao",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Agendamentos_ProjetoId",
-                table: "Agendamentos",
+                name: "IX_Agendamento_ProjetoId",
+                table: "Agendamento",
                 column: "ProjetoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Agendamentos_UsuarioId",
-                table: "Agendamentos",
+                name: "IX_Agendamento_UsuarioId",
+                table: "Agendamento",
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movimentacoes_ProjetoId",
-                table: "Movimentacoes",
+                name: "IX_Movimentacao_ProjetoId",
+                table: "Movimentacao",
                 column: "ProjetoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movimentacoes_UsuarioId",
-                table: "Movimentacoes",
+                name: "IX_Movimentacao_UsuarioId",
+                table: "Movimentacao",
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovimentacoesMateriais_MaterialId",
-                table: "MovimentacoesMateriais",
+                name: "IX_MovimentacaoMaterial_MaterialId",
+                table: "MovimentacaoMaterial",
                 column: "MaterialId");
         }
 
@@ -186,22 +186,22 @@ namespace tcc_core.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Agendamentos");
+                name: "Agendamento");
 
             migrationBuilder.DropTable(
-                name: "MovimentacoesMateriais");
+                name: "MovimentacaoMaterial");
 
             migrationBuilder.DropTable(
-                name: "Materiais");
+                name: "Material");
 
             migrationBuilder.DropTable(
-                name: "Movimentacoes");
+                name: "Movimentacao");
 
             migrationBuilder.DropTable(
-                name: "Projetos");
+                name: "Projeto");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Usuario");
         }
     }
 }

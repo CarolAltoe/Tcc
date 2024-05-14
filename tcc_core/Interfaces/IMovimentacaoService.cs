@@ -2,9 +2,9 @@
 
 namespace tcc_core.Interfaces
 {
-    public interface IMovimentacaoRepository
+    public interface IMovimentacaoService
     {
-        IEnumerable<Movimentacao> GetAllMovimentacoes();
+        IEnumerable<Movimentacao> GetAllMovimentacao();
         Movimentacao GetMovimentacaoById(int id);
         Movimentacao CreateMovimentacao(Movimentacao movimentacao);
         Movimentacao UpdateMovimentacao(int id, Movimentacao movimentacao);

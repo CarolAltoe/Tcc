@@ -6,23 +6,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace tcc_core.Services
 {
-    public class MovimentacaoMaterialRepository : IMovimentacaoMaterialRepository
+    public class MovimentacaoMaterialService : IMovimentacaoMaterialService
     {
         private readonly AppDbContext _context;
 
-        public MovimentacaoMaterialRepository(AppDbContext context)
+        public MovimentacaoMaterialService(AppDbContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<MovimentacaoMaterial> GetAllMovimentacaoMateriais()
+        public IEnumerable<MovimentacaoMaterial> GetAllMovimentacaoMaterial()
         {
-            return _context.MovimentacoesMateriais.ToList();
+            return _context.MovimentacaoMaterial.ToList();
         }
 
         public MovimentacaoMaterial GetMovimentacaoMaterialById(int movimentacaoId, int materialId)
         {
-            return _context.MovimentacoesMateriais.Find(movimentacaoId, materialId);
+            return _context.MovimentacaoMaterial.Find(movimentacaoId, materialId);
         }
 
         public MovimentacaoMaterial CreateMovimentacaoMaterial(MovimentacaoMaterial movimentacaoMaterial)
@@ -32,7 +32,7 @@ namespace tcc_core.Services
                 throw new ArgumentNullException(nameof(movimentacaoMaterial));
             }
 
-            _context.MovimentacoesMateriais.Add(movimentacaoMaterial);
+            _context.MovimentacaoMaterial.Add(movimentacaoMaterial);
             _context.SaveChanges();
             return movimentacaoMaterial;
         }
@@ -51,13 +51,13 @@ namespace tcc_core.Services
 
         public void DeleteMovimentacaoMaterial(int movimentacaoId, int materialId)
         {
-            var movimentacaoMaterial = _context.MovimentacoesMateriais.Find(movimentacaoId, materialId);
+            var movimentacaoMaterial = _context.MovimentacaoMaterial.Find(movimentacaoId, materialId);
             if (movimentacaoMaterial == null)
             {
                 throw new ArgumentException("MovimentaçãoMaterial não encontrado.");
             }
 
-            _context.MovimentacoesMateriais.Remove(movimentacaoMaterial);
+            _context.MovimentacaoMaterial.Remove(movimentacaoMaterial);
             _context.SaveChanges();
         }
     }

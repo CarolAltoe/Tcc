@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q5nuUhDU4XdKzWyJNvt3bPQrO+fTBIBrWGf4BWzTdOyo6lwRXgRlUdMr2i4PpURvJjMQQrD8P+Fuz65dyiJzrQ==",
+  "dgSpecHash": "TrJvxAZShQqtS5wganxds0E3MIJQamoe8yG/kxFMxxrXzLygemsZTbKWhloyx2ipsBI1nu4ux+CpWMDQsn+Zzg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Note191\\source\\repos\\tcc_core\\tcc_core\\tcc_core.csproj",
+  "projectFilePath": "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\tcc_core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Note191\\.nuget\\packages\\bananacakepop.middleware\\13.0.0\\bananacakepop.middleware.13.0.0.nupkg.sha512",
     "C:\\Users\\Note191\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",

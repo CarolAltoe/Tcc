@@ -22,19 +22,19 @@ namespace tcc_core.Controllers
         // GET: MovimentacaoMaterial
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.MovimentacoesMateriais.Include(m => m.Material).Include(m => m.Movimentacao);
+            var appDbContext = _context.MovimentacaoMaterial.Include(m => m.Material).Include(m => m.Movimentacao);
             return View(await appDbContext.ToListAsync());
         }
 
         // GET: MovimentacaoMaterial/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.MovimentacoesMateriais == null)
+            if (id == null || _context.MovimentacaoMaterial == null)
             {
                 return NotFound();
             }
 
-            var movimentacaoMaterial = await _context.MovimentacoesMateriais
+            var movimentacaoMaterial = await _context.MovimentacaoMaterial
                 .Include(m => m.Material)
                 .Include(m => m.Movimentacao)
                 .FirstOrDefaultAsync(m => m.MovimentacaoId == id);
@@ -49,8 +49,8 @@ namespace tcc_core.Controllers
         // GET: MovimentacaoMaterial/Create
         public IActionResult Create()
         {
-            ViewData["MaterialId"] = new SelectList(_context.Materiais, "Id", "Id");
-            ViewData["MovimentacaoId"] = new SelectList(_context.Movimentacoes, "Id", "Id");
+            ViewData["MaterialId"] = new SelectList(_context.Material, "Id", "Id");
+            ViewData["MovimentacaoId"] = new SelectList(_context.Movimentacao, "Id", "Id");
             return View();
         }
 
@@ -67,26 +67,26 @@ namespace tcc_core.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaterialId"] = new SelectList(_context.Materiais, "Id", "Id", movimentacaoMaterial.MaterialId);
-            ViewData["MovimentacaoId"] = new SelectList(_context.Movimentacoes, "Id", "Id", movimentacaoMaterial.MovimentacaoId);
+            ViewData["MaterialId"] = new SelectList(_context.Material, "Id", "Id", movimentacaoMaterial.MaterialId);
+            ViewData["MovimentacaoId"] = new SelectList(_context.Movimentacao, "Id", "Id", movimentacaoMaterial.MovimentacaoId);
             return View(movimentacaoMaterial);
         }
 
         // GET: MovimentacaoMaterial/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.MovimentacoesMateriais == null)
+            if (id == null || _context.MovimentacaoMaterial == null)
             {
                 return NotFound();
             }
 
-            var movimentacaoMaterial = await _context.MovimentacoesMateriais.FindAsync(id);
+            var movimentacaoMaterial = await _context.MovimentacaoMaterial.FindAsync(id);
             if (movimentacaoMaterial == null)
             {
                 return NotFound();
             }
-            ViewData["MaterialId"] = new SelectList(_context.Materiais, "Id", "Id", movimentacaoMaterial.MaterialId);
-            ViewData["MovimentacaoId"] = new SelectList(_context.Movimentacoes, "Id", "Id", movimentacaoMaterial.MovimentacaoId);
+            ViewData["MaterialId"] = new SelectList(_context.Material, "Id", "Id", movimentacaoMaterial.MaterialId);
+            ViewData["MovimentacaoId"] = new SelectList(_context.Movimentacao, "Id", "Id", movimentacaoMaterial.MovimentacaoId);
             return View(movimentacaoMaterial);
         }
 
@@ -122,20 +122,20 @@ namespace tcc_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaterialId"] = new SelectList(_context.Materiais, "Id", "Id", movimentacaoMaterial.MaterialId);
-            ViewData["MovimentacaoId"] = new SelectList(_context.Movimentacoes, "Id", "Id", movimentacaoMaterial.MovimentacaoId);
+            ViewData["MaterialId"] = new SelectList(_context.Material, "Id", "Id", movimentacaoMaterial.MaterialId);
+            ViewData["MovimentacaoId"] = new SelectList(_context.Movimentacao, "Id", "Id", movimentacaoMaterial.MovimentacaoId);
             return View(movimentacaoMaterial);
         }
 
         // GET: MovimentacaoMaterial/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.MovimentacoesMateriais == null)
+            if (id == null || _context.MovimentacaoMaterial == null)
             {
                 return NotFound();
             }
 
-            var movimentacaoMaterial = await _context.MovimentacoesMateriais
+            var movimentacaoMaterial = await _context.MovimentacaoMaterial
                 .Include(m => m.Material)
                 .Include(m => m.Movimentacao)
                 .FirstOrDefaultAsync(m => m.MovimentacaoId == id);
@@ -152,14 +152,14 @@ namespace tcc_core.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.MovimentacoesMateriais == null)
+            if (_context.MovimentacaoMaterial == null)
             {
-                return Problem("Entity set 'AppDbContext.MovimentacoesMateriais'  is null.");
+                return Problem("Entity set 'AppDbContext.MovimentacaoMaterial'  is null.");
             }
-            var movimentacaoMaterial = await _context.MovimentacoesMateriais.FindAsync(id);
+            var movimentacaoMaterial = await _context.MovimentacaoMaterial.FindAsync(id);
             if (movimentacaoMaterial != null)
             {
-                _context.MovimentacoesMateriais.Remove(movimentacaoMaterial);
+                _context.MovimentacaoMaterial.Remove(movimentacaoMaterial);
             }
             
             await _context.SaveChangesAsync();
@@ -168,7 +168,7 @@ namespace tcc_core.Controllers
 
         private bool MovimentacaoMaterialExists(int id)
         {
-          return (_context.MovimentacoesMateriais?.Any(e => e.MovimentacaoId == id)).GetValueOrDefault();
+          return (_context.MovimentacaoMaterial?.Any(e => e.MovimentacaoId == id)).GetValueOrDefault();
         }
     }
 }

@@ -8,15 +8,15 @@ namespace tcc_core.Query
         [UseDbContext(typeof(AppDbContext))]
         [UseFiltering]
         [UseSorting]
-        public IQueryable<Material> GetMateriais([Service] AppDbContext context)
+        public IQueryable<Material> GetMaterial([Service] AppDbContext context)
         {
-            return context.Materiais;
+            return context.Material;
         }
 
         [UseDbContext(typeof(AppDbContext))]
         public Material GetMaterialById([Service] AppDbContext context, int id)
         {
-            return context.Materiais.FirstOrDefault(m => m.Id == id);
+            return context.Material.FirstOrDefault(m => m.Id == id);
         }
     }
 }

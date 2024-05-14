@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Note191\\source\\repos\\tcc_core\\tcc_core\\tcc_core.csproj": {}
+    "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\tcc_core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Note191\\source\\repos\\tcc_core\\tcc_core\\tcc_core.csproj": {
+    "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\tcc_core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Note191\\source\\repos\\tcc_core\\tcc_core\\tcc_core.csproj",
+        "projectUniqueName": "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\tcc_core.csproj",
         "projectName": "tcc_core",
-        "projectPath": "C:\\Users\\Note191\\source\\repos\\tcc_core\\tcc_core\\tcc_core.csproj",
+        "projectPath": "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\tcc_core.csproj",
         "packagesPath": "C:\\Users\\Note191\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Note191\\source\\repos\\tcc_core\\tcc_core\\obj\\",
+        "outputPath": "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Note191\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -5,10 +5,9 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
-<h3>Tem certeza que deseja excluir esta movimentação material?</h3>
+<hr />
+<h4>Tem certeza que deseja excluir a relação entre movimentação e material abaixo?</h4>
 <div>
-    <h4>Movimentação - Material</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -35,6 +34,6 @@
         <input type="hidden" asp-for="MovimentacaoId" />
         <input type="hidden" asp-for="MaterialId" />
         <input type="submit" value="Excluir" class="btn btn-danger" /> |
-        <a asp-action="Index">Voltar</a>
+        <a asp-action="Index" class="btn btn-secondary ml-2">Voltar</a>
     </form>
 </div>

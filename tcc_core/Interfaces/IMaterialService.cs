@@ -2,9 +2,9 @@
 
 namespace tcc_core.Interfaces
 {
-    public interface IMaterialRepository
+    public interface IMaterialService
     {
-        IEnumerable<Material> GetAllMateriais();
+        IEnumerable<Material> GetAllMaterial();
         Material GetMaterialById(int id);
         Material CreateMaterial(Material material);
         Material UpdateMaterial(int id, Material material);

@@ -8,7 +8,7 @@ namespace tcc_core.Mutation
     {
         public async Task<Movimentacao> AddMovimentacao([Service] AppDbContext context, Movimentacao movimentacao)
         {
-            context.Movimentacoes.Add(movimentacao);
+            context.Movimentacao.Add(movimentacao);
             await context.SaveChangesAsync();
             return movimentacao;
         }
@@ -28,7 +28,7 @@ namespace tcc_core.Mutation
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!context.Movimentacoes.Any(e => e.Id == id))
+                if (!context.Movimentacao.Any(e => e.Id == id))
                 {
                     throw new GraphQLException("Movimentação não encontrada.");
                 }
@@ -43,13 +43,13 @@ namespace tcc_core.Mutation
 
         public async Task<Movimentacao> DeleteMovimentacao([Service] AppDbContext context, int id)
         {
-            var movimentacao = await context.Movimentacoes.FindAsync(id);
+            var movimentacao = await context.Movimentacao.FindAsync(id);
             if (movimentacao == null)
             {
                 throw new GraphQLException("Movimentação não encontrada.");
             }
 
-            context.Movimentacoes.Remove(movimentacao);
+            context.Movimentacao.Remove(movimentacao);
             await context.SaveChangesAsync();
 
             return movimentacao;

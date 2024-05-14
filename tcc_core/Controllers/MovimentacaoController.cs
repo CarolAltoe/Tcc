@@ -22,19 +22,19 @@ namespace tcc_core.Controllers
         // GET: Movimentacao
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Movimentacoes.Include(m => m.Projeto).Include(m => m.Usuario);
+            var appDbContext = _context.Movimentacao.Include(m => m.Projeto).Include(m => m.Usuario);
             return View(await appDbContext.ToListAsync());
         }
 
         // GET: Movimentacao/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Movimentacoes == null)
+            if (id == null || _context.Movimentacao == null)
             {
                 return NotFound();
             }
 
-            var movimentacao = await _context.Movimentacoes
+            var movimentacao = await _context.Movimentacao
                 .Include(m => m.Projeto)
                 .Include(m => m.Usuario)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -49,8 +49,8 @@ namespace tcc_core.Controllers
         // GET: Movimentacao/Create
         public IActionResult Create()
         {
-            ViewData["ProjetoId"] = new SelectList(_context.Projetos, "Id", "Id");
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id");
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace tcc_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Responsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao)
+        public async Task<IActionResult> Create([Bind("Id,Responsavelonsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao)
         {
             if (ModelState.IsValid)
             {
@@ -67,26 +67,26 @@ namespace tcc_core.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projetos, "Id", "Id", movimentacao.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", movimentacao.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", movimentacao.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", movimentacao.UsuarioId);
             return View(movimentacao);
         }
 
         // GET: Movimentacao/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Movimentacoes == null)
+            if (id == null || _context.Movimentacao == null)
             {
                 return NotFound();
             }
 
-            var movimentacao = await _context.Movimentacoes.FindAsync(id);
+            var movimentacao = await _context.Movimentacao.FindAsync(id);
             if (movimentacao == null)
             {
                 return NotFound();
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projetos, "Id", "Id", movimentacao.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", movimentacao.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", movimentacao.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", movimentacao.UsuarioId);
             return View(movimentacao);
         }
 
@@ -95,7 +95,7 @@ namespace tcc_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Responsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Responsavelonsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao)
         {
             if (id != movimentacao.Id)
             {
@@ -122,20 +122,20 @@ namespace tcc_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projetos, "Id", "Id", movimentacao.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", movimentacao.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", movimentacao.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", movimentacao.UsuarioId);
             return View(movimentacao);
         }
 
         // GET: Movimentacao/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Movimentacoes == null)
+            if (id == null || _context.Movimentacao == null)
             {
                 return NotFound();
             }
 
-            var movimentacao = await _context.Movimentacoes
+            var movimentacao = await _context.Movimentacao
                 .Include(m => m.Projeto)
                 .Include(m => m.Usuario)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -152,14 +152,14 @@ namespace tcc_core.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Movimentacoes == null)
+            if (_context.Movimentacao == null)
             {
-                return Problem("Entity set 'AppDbContext.Movimentacoes'  is null.");
+                return Problem("Entity set 'AppDbContext.Movimentacao'  is null.");
             }
-            var movimentacao = await _context.Movimentacoes.FindAsync(id);
+            var movimentacao = await _context.Movimentacao.FindAsync(id);
             if (movimentacao != null)
             {
-                _context.Movimentacoes.Remove(movimentacao);
+                _context.Movimentacao.Remove(movimentacao);
             }
             
             await _context.SaveChangesAsync();
@@ -168,7 +168,7 @@ namespace tcc_core.Controllers
 
         private bool MovimentacaoExists(int id)
         {
-          return (_context.Movimentacoes?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Movimentacao?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

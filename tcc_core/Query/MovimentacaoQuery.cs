@@ -8,15 +8,15 @@ namespace tcc_core.Query
         [UseDbContext(typeof(AppDbContext))]
         [UseFiltering]
         [UseSorting]
-        public IQueryable<Movimentacao> GetMovimentacoes([Service] AppDbContext context)
+        public IQueryable<Movimentacao> GetMovimentacao([Service] AppDbContext context)
         {
-            return context.Movimentacoes;
+            return context.Movimentacao;
         }
 
         [UseDbContext(typeof(AppDbContext))]
         public Movimentacao GetMovimentacaoById([Service] AppDbContext context, int id)
         {
-            return context.Movimentacoes.FirstOrDefault(m => m.Id == id);
+            return context.Movimentacao.FirstOrDefault(m => m.Id == id);
         }
     }
 }

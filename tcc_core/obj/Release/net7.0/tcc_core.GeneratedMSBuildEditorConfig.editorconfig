@@ -9,159 +9,159 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = tcc_core
 build_property.RootNamespace = tcc_core
-build_property.ProjectDir = C:\Users\Note191\Repos\Tcc\tcc_core\tcc_core\
+build_property.ProjectDir = C:\Users\Note191\Repos\Tcc\tcc_core\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Note191\Repos\Tcc\tcc_core\tcc_core
+build_property.MSBuildProjectDirectory = C:\Users\Note191\Repos\Tcc\tcc_core
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Agendamento/Create.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Agendamento/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Agendamento/Delete.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Agendamento/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Agendamento/Details.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Agendamento/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Agendamento/Edit.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Agendamento/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Agendamento/Index.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Agendamento/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Home/Index.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Home/Privacy.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Material/Create.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Material/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0ZXJpYWxcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Material/Delete.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Material/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0ZXJpYWxcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Material/Details.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Material/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0ZXJpYWxcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Material/Edit.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Material/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0ZXJpYWxcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Material/Index.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Material/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0ZXJpYWxcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/MovimentacaoMaterial/Create.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/MovimentacaoMaterial/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aW1lbnRhY2FvTWF0ZXJpYWxcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/MovimentacaoMaterial/Delete.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/MovimentacaoMaterial/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aW1lbnRhY2FvTWF0ZXJpYWxcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/MovimentacaoMaterial/Details.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/MovimentacaoMaterial/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aW1lbnRhY2FvTWF0ZXJpYWxcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/MovimentacaoMaterial/Edit.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/MovimentacaoMaterial/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aW1lbnRhY2FvTWF0ZXJpYWxcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/MovimentacaoMaterial/Index.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/MovimentacaoMaterial/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aW1lbnRhY2FvTWF0ZXJpYWxcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Movimentacao/Create.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Movimentacao/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aW1lbnRhY2FvXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Movimentacao/Delete.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Movimentacao/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aW1lbnRhY2FvXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Movimentacao/Details.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Movimentacao/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aW1lbnRhY2FvXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Movimentacao/Edit.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Movimentacao/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aW1lbnRhY2FvXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Movimentacao/Index.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Movimentacao/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aW1lbnRhY2FvXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Projeto/Create.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Projeto/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamV0b1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Projeto/Delete.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Projeto/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamV0b1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Projeto/Details.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Projeto/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamV0b1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Projeto/Edit.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Projeto/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamV0b1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Projeto/Index.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Projeto/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamV0b1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Shared/Error.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Usuario/Create.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Usuario/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Usuario/Delete.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Usuario/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Usuario/Details.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Usuario/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Usuario/Edit.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Usuario/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Usuario/Index.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Usuario/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/_ViewImports.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/_ViewStart.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Note191/Repos/Tcc/tcc_core/tcc_core/Views/Shared/_Layout.cshtml]
+[C:/Users/Note191/Repos/Tcc/tcc_core/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-4k3liywvmy

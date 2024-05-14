@@ -50,11 +50,11 @@ namespace tcc_core.Migrations
                     b.Property<int>("QtdPessoas")
                         .HasColumnType("int");
 
-                    b.Property<string>("RespExterno")
+                    b.Property<string>("ResponsavelExterno")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("RespInterno")
+                    b.Property<string>("ResponsavelInterno")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -71,7 +71,7 @@ namespace tcc_core.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Agendamentos");
+                    b.ToTable("Agendamento");
                 });
 
             modelBuilder.Entity("tcc_core.Models.Material", b =>
@@ -93,7 +93,7 @@ namespace tcc_core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Materiais");
+                    b.ToTable("Material");
                 });
 
             modelBuilder.Entity("tcc_core.Models.Movimentacao", b =>
@@ -109,7 +109,7 @@ namespace tcc_core.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<string>("Responsavel")
+                    b.Property<string>("Responsavelonsavel")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -126,7 +126,7 @@ namespace tcc_core.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Movimentacoes");
+                    b.ToTable("Movimentacao");
                 });
 
             modelBuilder.Entity("tcc_core.Models.MovimentacaoMaterial", b =>
@@ -144,7 +144,7 @@ namespace tcc_core.Migrations
 
                     b.HasIndex("MaterialId");
 
-                    b.ToTable("MovimentacoesMateriais");
+                    b.ToTable("MovimentacaoMaterial");
                 });
 
             modelBuilder.Entity("tcc_core.Models.Projeto", b =>
@@ -169,7 +169,7 @@ namespace tcc_core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projetos");
+                    b.ToTable("Projeto");
                 });
 
             modelBuilder.Entity("tcc_core.Models.Usuario", b =>
@@ -192,19 +192,19 @@ namespace tcc_core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("tcc_core.Models.Agendamento", b =>
                 {
                     b.HasOne("tcc_core.Models.Projeto", "Projeto")
-                        .WithMany("Agendamentos")
+                        .WithMany("Agendamento")
                         .HasForeignKey("ProjetoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("tcc_core.Models.Usuario", "Usuario")
-                        .WithMany("Agendamentos")
+                        .WithMany("Agendamento")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -217,13 +217,13 @@ namespace tcc_core.Migrations
             modelBuilder.Entity("tcc_core.Models.Movimentacao", b =>
                 {
                     b.HasOne("tcc_core.Models.Projeto", "Projeto")
-                        .WithMany("Movimentacoes")
+                        .WithMany("Movimentacao")
                         .HasForeignKey("ProjetoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("tcc_core.Models.Usuario", "Usuario")
-                        .WithMany("Movimentacoes")
+                        .WithMany("Movimentacao")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -236,13 +236,13 @@ namespace tcc_core.Migrations
             modelBuilder.Entity("tcc_core.Models.MovimentacaoMaterial", b =>
                 {
                     b.HasOne("tcc_core.Models.Material", "Material")
-                        .WithMany("MovimentacoesMateriais")
+                        .WithMany("MovimentacaoMaterial")
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("tcc_core.Models.Movimentacao", "Movimentacao")
-                        .WithMany("MovimentacoesMateriais")
+                        .WithMany("MovimentacaoMaterial")
                         .HasForeignKey("MovimentacaoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -254,26 +254,26 @@ namespace tcc_core.Migrations
 
             modelBuilder.Entity("tcc_core.Models.Material", b =>
                 {
-                    b.Navigation("MovimentacoesMateriais");
+                    b.Navigation("MovimentacaoMaterial");
                 });
 
             modelBuilder.Entity("tcc_core.Models.Movimentacao", b =>
                 {
-                    b.Navigation("MovimentacoesMateriais");
+                    b.Navigation("MovimentacaoMaterial");
                 });
 
             modelBuilder.Entity("tcc_core.Models.Projeto", b =>
                 {
-                    b.Navigation("Agendamentos");
+                    b.Navigation("Agendamento");
 
-                    b.Navigation("Movimentacoes");
+                    b.Navigation("Movimentacao");
                 });
 
             modelBuilder.Entity("tcc_core.Models.Usuario", b =>
                 {
-                    b.Navigation("Agendamentos");
+                    b.Navigation("Agendamento");
 
-                    b.Navigation("Movimentacoes");
+                    b.Navigation("Movimentacao");
                 });
 #pragma warning restore 612, 618
         }

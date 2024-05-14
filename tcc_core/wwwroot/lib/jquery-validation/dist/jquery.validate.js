@@ -996,7 +996,7 @@ $.extend( $.validator, {
 				} else if ( error.parents( "label[for='" + this.escapeCssMeta( elementID ) + "']" ).length === 0 ) {
 					errorID = error.attr( "id" );
 
-					// Respect existing non-error aria-describedby
+					// Responsavelect existing non-error aria-describedby
 					if ( !describedBy ) {
 						describedBy = errorID;
 					} else if ( !describedBy.match( new RegExp( "\\b" + this.escapeCssMeta( errorID ) + "\\b" ) ) ) {

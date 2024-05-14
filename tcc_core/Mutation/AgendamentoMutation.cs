@@ -8,7 +8,7 @@ namespace tcc_core.Mutation
     {
         public async Task<Agendamento> AddAgendamento([Service] AppDbContext context, Agendamento agendamento)
         {
-            context.Agendamentos.Add(agendamento);
+            context.Agendamento.Add(agendamento);
             await context.SaveChangesAsync();
             return agendamento;
         }
@@ -28,7 +28,7 @@ namespace tcc_core.Mutation
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!context.Agendamentos.Any(e => e.Id == id))
+                if (!context.Agendamento.Any(e => e.Id == id))
                 {
                     throw new GraphQLException("Agendamento não encontrado.");
                 }
@@ -43,13 +43,13 @@ namespace tcc_core.Mutation
 
         public async Task<Agendamento> DeleteAgendamento([Service] AppDbContext context, int id)
         {
-            var agendamento = await context.Agendamentos.FindAsync(id);
+            var agendamento = await context.Agendamento.FindAsync(id);
             if (agendamento == null)
             {
                 throw new GraphQLException("Agendamento não encontrado.");
             }
 
-            context.Agendamentos.Remove(agendamento);
+            context.Agendamento.Remove(agendamento);
             await context.SaveChangesAsync();
 
             return agendamento;

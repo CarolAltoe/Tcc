@@ -6,23 +6,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace tcc_core.Services
 {
-    public class AgendamentoRepository : IAgendamentoRepository
+    public class AgendamentoService : IAgendamentoService
     {
         private readonly AppDbContext _context;
 
-        public AgendamentoRepository(AppDbContext context)
+        public AgendamentoService(AppDbContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Agendamento> GetAllAgendamentos()
+        public IEnumerable<Agendamento> GetAllAgendamento()
         {
-            return _context.Agendamentos.ToList();
+            return _context.Agendamento.ToList();
         }
 
         public Agendamento GetAgendamentoById(int id)
         {
-            return _context.Agendamentos.Find(id);
+            return _context.Agendamento.Find(id);
         }
 
         public Agendamento CreateAgendamento(Agendamento agendamento)
@@ -32,7 +32,7 @@ namespace tcc_core.Services
                 throw new ArgumentNullException(nameof(agendamento));
             }
 
-            _context.Agendamentos.Add(agendamento);
+            _context.Agendamento.Add(agendamento);
             _context.SaveChanges();
             return agendamento;
         }
@@ -51,13 +51,13 @@ namespace tcc_core.Services
 
         public void DeleteAgendamento(int id)
         {
-            var agendamento = _context.Agendamentos.Find(id);
+            var agendamento = _context.Agendamento.Find(id);
             if (agendamento == null)
             {
                 throw new ArgumentException("Agendamento não encontrado.");
             }
 
-            _context.Agendamentos.Remove(agendamento);
+            _context.Agendamento.Remove(agendamento);
             _context.SaveChanges();
         }
     }

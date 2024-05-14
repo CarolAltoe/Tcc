@@ -6,23 +6,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace tcc_core.Services
 {
-    public class MaterialRepository : IMaterialRepository
+    public class MaterialService : IMaterialService
     {
         private readonly AppDbContext _context;
 
-        public MaterialRepository(AppDbContext context)
+        public MaterialService(AppDbContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Material> GetAllMateriais()
+        public IEnumerable<Material> GetAllMaterial()
         {
-            return _context.Materiais.ToList();
+            return _context.Material.ToList();
         }
 
         public Material GetMaterialById(int id)
         {
-            return _context.Materiais.Find(id);
+            return _context.Material.Find(id);
         }
 
         public Material CreateMaterial(Material material)
@@ -32,7 +32,7 @@ namespace tcc_core.Services
                 throw new ArgumentNullException(nameof(material));
             }
 
-            _context.Materiais.Add(material);
+            _context.Material.Add(material);
             _context.SaveChanges();
             return material;
         }
@@ -51,13 +51,13 @@ namespace tcc_core.Services
 
         public void DeleteMaterial(int id)
         {
-            var material = _context.Materiais.Find(id);
+            var material = _context.Material.Find(id);
             if (material == null)
             {
                 throw new ArgumentException("Material não encontrado.");
             }
 
-            _context.Materiais.Remove(material);
+            _context.Material.Remove(material);
             _context.SaveChanges();
         }
     }

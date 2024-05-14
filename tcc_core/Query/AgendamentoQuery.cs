@@ -8,15 +8,15 @@ namespace tcc_core.Query
         [UseDbContext(typeof(AppDbContext))]
         [UseFiltering]
         [UseSorting]
-        public IQueryable<Agendamento> GetAgendamentos([Service] AppDbContext context)
+        public IQueryable<Agendamento> GetAgendamento([Service] AppDbContext context)
         {
-            return context.Agendamentos;
+            return context.Agendamento;
         }
 
         [UseDbContext(typeof(AppDbContext))]
         public Agendamento GetAgendamentoById([Service] AppDbContext context, int id)
         {
-            return context.Agendamentos.FirstOrDefault(a => a.Id == id);
+            return context.Agendamento.FirstOrDefault(a => a.Id == id);
         }
     }
 }

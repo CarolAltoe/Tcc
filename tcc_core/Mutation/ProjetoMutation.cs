@@ -8,7 +8,7 @@ namespace tcc_core.Mutation
     {
         public async Task<Projeto> AddProjeto([Service] AppDbContext context, Projeto projeto)
         {
-            context.Projetos.Add(projeto);
+            context.Projeto.Add(projeto);
             await context.SaveChangesAsync();
             return projeto;
         }
@@ -28,7 +28,7 @@ namespace tcc_core.Mutation
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!context.Projetos.Any(e => e.Id == id))
+                if (!context.Projeto.Any(e => e.Id == id))
                 {
                     throw new GraphQLException("Projeto não encontrado.");
                 }
@@ -43,13 +43,13 @@ namespace tcc_core.Mutation
 
         public async Task<Projeto> DeleteProjeto([Service] AppDbContext context, int id)
         {
-            var projeto = await context.Projetos.FindAsync(id);
+            var projeto = await context.Projeto.FindAsync(id);
             if (projeto == null)
             {
                 throw new GraphQLException("Projeto não encontrado.");
             }
 
-            context.Projetos.Remove(projeto);
+            context.Projeto.Remove(projeto);
             await context.SaveChangesAsync();
 
             return projeto;

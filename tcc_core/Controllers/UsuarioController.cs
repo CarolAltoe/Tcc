@@ -1,84 +1,140 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using tcc_core.Data;
+using tcc_core.Interfaces;
 using tcc_core.Models;
 
 namespace tcc_core.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class UsuarioController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(AppDbContext context)
+        public UsuarioController(IUsuarioService usuarioService)
         {
-            _context = context;
+            _usuarioService = usuarioService;
         }
 
-        // GET: Usuario
+        // [HttpGet]
+        [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
-              return _context.Usuarios != null ? 
-                          View(await _context.Usuarios.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Usuarios'  is null.");
+            try
+            {
+                var usuarios = await _usuarioService.GetAllUsuariosAsync();
+                return View(usuarios);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
+            }
         }
 
         // GET: Usuario/Details/5
+        // [HttpGet("{id}")]
+        [HttpGet("Details/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Usuarios == null)
+            if (id == null || _usuarioService == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
+            try
             {
-                return NotFound();
+                var usuario = await _usuarioService.GetUsuarioByIdAsync(id.Value);
+                if (usuario == null)
+                {
+                    return NotFound();
+                }
+                return View(usuario);
             }
-
-            return View(usuario);
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
+            }
         }
 
         // GET: Usuario/Create
+        //  [HttpGet("create")]
+
+        [HttpGet("Create")]
         public IActionResult Create()
         {
             return View();
         }
 
+        // GET: Usuario/Edit/5
+        // [HttpGet("{id}")]
+
+        [HttpGet("Edit/{id}")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _usuarioService == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                var usuario = await _usuarioService.GetUsuarioByIdAsync(id.Value);
+                if (usuario == null)
+                {
+                    return NotFound();
+                }
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
+            }
+        }
+
+        // GET: Usuario/Delete/5
+        // [HttpGet("{id}")]
+
+        [HttpGet("Delete/{id}")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _usuarioService == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                var usuario = await _usuarioService.GetUsuarioByIdAsync(id.Value);
+                if (usuario == null)
+                {
+                    return NotFound();
+                }
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
+            }
+        }
+
         // POST: Usuario/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NomeCompleto,Email,Senha")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(usuario);
-        }
-
-        // GET: Usuario/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Usuarios == null)
-            {
-                return NotFound();
-            }
-
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario == null)
-            {
-                return NotFound();
+                try
+                {
+                    await _usuarioService.AddUsuarioAsync(usuario);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
+                }
             }
             return View(usuario);
         }
@@ -86,7 +142,8 @@ namespace tcc_core.Controllers
         // POST: Usuario/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+
+        [HttpPost("Edit/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NomeCompleto,Email,Senha")] Usuario usuario)
         {
@@ -99,64 +156,47 @@ namespace tcc_core.Controllers
             {
                 try
                 {
-                    _context.Update(usuario);
-                    await _context.SaveChangesAsync();
+                    await _usuarioService.UpdateUsuarioAsync(id, usuario);
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (ArgumentException ex)
                 {
-                    if (!UsuarioExists(usuario.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound(ex.Message);
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
+                }
             }
-            return View(usuario);
-        }
-
-        // GET: Usuario/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Usuarios == null)
-            {
-                return NotFound();
-            }
-
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-
             return View(usuario);
         }
 
         // POST: Usuario/Delete/5
-        [HttpPost, ActionName("Delete")]
+
+        [HttpPost("Delete/{id}")]
+       // [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Usuarios == null)
+            if (_usuarioService == null)
             {
-                return Problem("Entity set 'AppDbContext.Usuarios'  is null.");
+                return Problem("Entity set 'AppDbContext.Usuario'  is null.");
             }
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario != null)
+            try
             {
-                _context.Usuarios.Remove(usuario);
+                await _usuarioService.DeleteUsuarioAsync(id);
+                return RedirectToAction(nameof(Index));
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
+            }
         }
 
-        private bool UsuarioExists(int id)
-        {
-          return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+       
     }
 }

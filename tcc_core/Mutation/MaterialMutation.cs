@@ -8,7 +8,7 @@ namespace tcc_core.Mutation
     {
         public async Task<Material> AddMaterial([Service] AppDbContext context, Material material)
         {
-            context.Materiais.Add(material);
+            context.Material.Add(material);
             await context.SaveChangesAsync();
             return material;
         }
@@ -28,7 +28,7 @@ namespace tcc_core.Mutation
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!context.Materiais.Any(e => e.Id == id))
+                if (!context.Material.Any(e => e.Id == id))
                 {
                     throw new GraphQLException("Material não encontrado.");
                 }
@@ -43,13 +43,13 @@ namespace tcc_core.Mutation
 
         public async Task<Material> DeleteMaterial([Service] AppDbContext context, int id)
         {
-            var material = await context.Materiais.FindAsync(id);
+            var material = await context.Material.FindAsync(id);
             if (material == null)
             {
                 throw new GraphQLException("Material não encontrado.");
             }
 
-            context.Materiais.Remove(material);
+            context.Material.Remove(material);
             await context.SaveChangesAsync();
 
             return material;

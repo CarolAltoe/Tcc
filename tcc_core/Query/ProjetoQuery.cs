@@ -8,15 +8,15 @@ namespace tcc_core.Query
         [UseDbContext(typeof(AppDbContext))]
         [UseFiltering]
         [UseSorting]
-        public IQueryable<Projeto> GetProjetos([Service] AppDbContext context)
+        public IQueryable<Projeto> GetProjeto([Service] AppDbContext context)
         {
-            return context.Projetos;
+            return context.Projeto;
         }
 
         [UseDbContext(typeof(AppDbContext))]
         public Projeto GetProjetoById([Service] AppDbContext context, int id)
         {
-            return context.Projetos.FirstOrDefault(p => p.Id == id);
+            return context.Projeto.FirstOrDefault(p => p.Id == id);
         }
     }
 }

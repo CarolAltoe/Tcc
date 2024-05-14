@@ -2,9 +2,9 @@
 
 namespace tcc_core.Interfaces
 {
-    public interface IAgendamentoRepository
+    public interface IAgendamentoService
     {
-        IEnumerable<Agendamento> GetAllAgendamentos();
+        IEnumerable<Agendamento> GetAllAgendamento();
         Agendamento GetAgendamentoById(int id);
         Agendamento CreateAgendamento(Agendamento agendamento);
         Agendamento UpdateAgendamento(int id, Agendamento agendamento);

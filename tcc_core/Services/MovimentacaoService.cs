@@ -6,23 +6,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace tcc_core.Services
 {
-    public class MovimentacaoRepository : IMovimentacaoRepository
+    public class MovimentacaoService : IMovimentacaoService
     {
         private readonly AppDbContext _context;
 
-        public MovimentacaoRepository(AppDbContext context)
+        public MovimentacaoService(AppDbContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Movimentacao> GetAllMovimentacoes()
+        public IEnumerable<Movimentacao> GetAllMovimentacao()
         {
-            return _context.Movimentacoes.ToList();
+            return _context.Movimentacao.ToList();
         }
 
         public Movimentacao GetMovimentacaoById(int id)
         {
-            return _context.Movimentacoes.Find(id);
+            return _context.Movimentacao.Find(id);
         }
 
         public Movimentacao CreateMovimentacao(Movimentacao movimentacao)
@@ -32,7 +32,7 @@ namespace tcc_core.Services
                 throw new ArgumentNullException(nameof(movimentacao));
             }
 
-            _context.Movimentacoes.Add(movimentacao);
+            _context.Movimentacao.Add(movimentacao);
             _context.SaveChanges();
             return movimentacao;
         }
@@ -51,13 +51,13 @@ namespace tcc_core.Services
 
         public void DeleteMovimentacao(int id)
         {
-            var movimentacao = _context.Movimentacoes.Find(id);
+            var movimentacao = _context.Movimentacao.Find(id);
             if (movimentacao == null)
             {
                 throw new ArgumentException("Movimentação não encontrada.");
             }
 
-            _context.Movimentacoes.Remove(movimentacao);
+            _context.Movimentacao.Remove(movimentacao);
             _context.SaveChanges();
         }
     }

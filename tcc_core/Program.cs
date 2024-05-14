@@ -5,39 +5,33 @@ using tcc_core.Query;
 using System;
 using tcc_core.Interfaces;
 using tcc_core.Services;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
-builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
-builder.Services.AddScoped<IMovimentacaoRepository, MovimentacaoRepository>();
-builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
-builder.Services.AddScoped<IMovimentacaoMaterialRepository, MovimentacaoMaterialRepository>();
+builder.Services.AddServices();
 
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddGraphQLServer()
-    .AddQueryType<RootQuery>()
-    .AddMutationType<RootMutation>()
+    .AddQueryType<UsuarioQuery>()
+    .AddQueryType<ProjetoQuery>()
+    .AddQueryType<MaterialQuery>()
+    .AddQueryType<AgendamentoQuery>()
+    .AddQueryType<MovimentacaoQuery>()
+    .AddMutationType<UsuarioMutation>()
+    .AddMutationType<ProjetoMutation>()
+    .AddMutationType<MaterialMutation>()
+    .AddMutationType<AgendamentoMutation>()
+    .AddMutationType<MovimentacaoMutation>()
     .AddFiltering()
     .AddSorting();
-//.AddType<MyType>()
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-//;serverVersion=8.0.28",
-   // new MySqlServerVersion(new Version(7, 0, 0))));
-
-//(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 
 var app = builder.Build();
 
@@ -62,19 +56,17 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
-    endpoints.MapGraphQL();
+    endpoints.MapGraphQL("/graphql/lab");
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}"
     );
 });
 
-/*app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-*/
-
-//app.MapGraphQL();
+//Migrations
+using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+context.Database.Migrate();
 
 app.Run();
 

@@ -11,33 +11,33 @@ namespace tcc_core.Data
         {
         }
 
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Projeto> Projetos { get; set; }
-        public DbSet<Agendamento> Agendamentos { get; set; }
-        public DbSet<Material> Materiais { get; set; }
-        public DbSet<Movimentacao> Movimentacoes { get; set; }
-        public DbSet<MovimentacaoMaterial> MovimentacoesMateriais { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Projeto> Projeto { get; set; }
+        public DbSet<Agendamento> Agendamento { get; set; }
+        public DbSet<Material> Material { get; set; }
+        public DbSet<Movimentacao> Movimentacao { get; set; }
+        public DbSet<MovimentacaoMaterial> MovimentacaoMaterial{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Agendamento>()
                 .HasOne(a => a.Projeto)
-                .WithMany(p => p.Agendamentos)
+                .WithMany(p => p.Agendamento)
                 .HasForeignKey(a => a.ProjetoId);
 
             modelBuilder.Entity<Agendamento>()
                 .HasOne(a => a.Usuario)
-                .WithMany(u => u.Agendamentos)
+                .WithMany(u => u.Agendamento)
                 .HasForeignKey(a => a.UsuarioId);
 
             modelBuilder.Entity<Movimentacao>()
                 .HasOne(m => m.Projeto)
-                .WithMany(p => p.Movimentacoes)
+                .WithMany(p => p.Movimentacao)
                 .HasForeignKey(m => m.ProjetoId);
 
             modelBuilder.Entity<Movimentacao>()
                 .HasOne(m => m.Usuario)
-                .WithMany(u => u.Movimentacoes)
+                .WithMany(u => u.Movimentacao)
                 .HasForeignKey(m => m.UsuarioId);
 
             modelBuilder.Entity<MovimentacaoMaterial>()
@@ -45,12 +45,12 @@ namespace tcc_core.Data
 
             modelBuilder.Entity<MovimentacaoMaterial>()
                 .HasOne(mm => mm.Movimentacao)
-                .WithMany(m => m.MovimentacoesMateriais)
+                .WithMany(m => m.MovimentacaoMaterial)
                 .HasForeignKey(mm => mm.MovimentacaoId);
 
             modelBuilder.Entity<MovimentacaoMaterial>()
                 .HasOne(mm => mm.Material)
-                .WithMany(m => m.MovimentacoesMateriais)
+                .WithMany(m => m.MovimentacaoMaterial)
                 .HasForeignKey(mm => mm.MaterialId);
         }
     }

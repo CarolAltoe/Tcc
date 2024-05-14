@@ -22,19 +22,19 @@ namespace tcc_core.Controllers
         // GET: Agendamento
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Agendamentos.Include(a => a.Projeto).Include(a => a.Usuario);
+            var appDbContext = _context.Agendamento.Include(a => a.Projeto).Include(a => a.Usuario);
             return View(await appDbContext.ToListAsync());
         }
 
         // GET: Agendamento/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Agendamentos == null)
+            if (id == null || _context.Agendamento == null)
             {
                 return NotFound();
             }
 
-            var agendamento = await _context.Agendamentos
+            var agendamento = await _context.Agendamento
                 .Include(a => a.Projeto)
                 .Include(a => a.Usuario)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -49,8 +49,8 @@ namespace tcc_core.Controllers
         // GET: Agendamento/Create
         public IActionResult Create()
         {
-            ViewData["ProjetoId"] = new SelectList(_context.Projetos, "Id", "Id");
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id");
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace tcc_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RespInterno,RespExterno,Turma,Descricao,Feedback,Observacoes,DtInicial,DtFinal,QtdPessoas,ProjetoId,UsuarioId")] Agendamento agendamento)
+        public async Task<IActionResult> Create([Bind("Id,ResponsavelInterno,ResponsavelExterno,Turma,Descricao,Feedback,Observacoes,DtInicial,DtFinal,QtdPessoas,ProjetoId,UsuarioId")] Agendamento agendamento)
         {
             if (ModelState.IsValid)
             {
@@ -67,26 +67,26 @@ namespace tcc_core.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projetos, "Id", "Id", agendamento.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", agendamento.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", agendamento.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", agendamento.UsuarioId);
             return View(agendamento);
         }
 
         // GET: Agendamento/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Agendamentos == null)
+            if (id == null || _context.Agendamento == null)
             {
                 return NotFound();
             }
 
-            var agendamento = await _context.Agendamentos.FindAsync(id);
+            var agendamento = await _context.Agendamento.FindAsync(id);
             if (agendamento == null)
             {
                 return NotFound();
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projetos, "Id", "Id", agendamento.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", agendamento.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", agendamento.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", agendamento.UsuarioId);
             return View(agendamento);
         }
 
@@ -95,7 +95,7 @@ namespace tcc_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RespInterno,RespExterno,Turma,Descricao,Feedback,Observacoes,DtInicial,DtFinal,QtdPessoas,ProjetoId,UsuarioId")] Agendamento agendamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ResponsavelInterno,ResponsavelExterno,Turma,Descricao,Feedback,Observacoes,DtInicial,DtFinal,QtdPessoas,ProjetoId,UsuarioId")] Agendamento agendamento)
         {
             if (id != agendamento.Id)
             {
@@ -122,20 +122,20 @@ namespace tcc_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projetos, "Id", "Id", agendamento.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", agendamento.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", agendamento.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", agendamento.UsuarioId);
             return View(agendamento);
         }
 
         // GET: Agendamento/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Agendamentos == null)
+            if (id == null || _context.Agendamento == null)
             {
                 return NotFound();
             }
 
-            var agendamento = await _context.Agendamentos
+            var agendamento = await _context.Agendamento
                 .Include(a => a.Projeto)
                 .Include(a => a.Usuario)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -152,14 +152,14 @@ namespace tcc_core.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Agendamentos == null)
+            if (_context.Agendamento == null)
             {
-                return Problem("Entity set 'AppDbContext.Agendamentos'  is null.");
+                return Problem("Entity set 'AppDbContext.Agendamento'  is null.");
             }
-            var agendamento = await _context.Agendamentos.FindAsync(id);
+            var agendamento = await _context.Agendamento.FindAsync(id);
             if (agendamento != null)
             {
-                _context.Agendamentos.Remove(agendamento);
+                _context.Agendamento.Remove(agendamento);
             }
             
             await _context.SaveChangesAsync();
@@ -168,7 +168,7 @@ namespace tcc_core.Controllers
 
         private bool AgendamentoExists(int id)
         {
-          return (_context.Agendamentos?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Agendamento?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

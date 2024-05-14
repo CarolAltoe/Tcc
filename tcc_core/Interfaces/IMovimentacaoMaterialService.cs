@@ -2,9 +2,9 @@
 
 namespace tcc_core.Interfaces
 {
-    public interface IMovimentacaoMaterialRepository
+    public interface IMovimentacaoMaterialService
     {
-        IEnumerable<MovimentacaoMaterial> GetAllMovimentacaoMateriais();
+        IEnumerable<MovimentacaoMaterial> GetAllMovimentacaoMaterial();
         MovimentacaoMaterial GetMovimentacaoMaterialById(int movimentacaoId, int materialId);
         MovimentacaoMaterial CreateMovimentacaoMaterial(MovimentacaoMaterial movimentacaoMaterial);
         MovimentacaoMaterial UpdateMovimentacaoMaterial(int movimentacaoId, int materialId, MovimentacaoMaterial movimentacaoMaterial);

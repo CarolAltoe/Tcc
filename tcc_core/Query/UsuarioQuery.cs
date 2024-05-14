@@ -1,22 +1,21 @@
-﻿using tcc_core.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using tcc_core.Data;
 using tcc_core.Models;
 
 namespace tcc_core.Query
 {
     public class UsuarioQuery
     {
-        [UseDbContext(typeof(AppDbContext))]
         [UseFiltering]
         [UseSorting]
-        public IQueryable<Usuario> GetUsuarios([Service] AppDbContext context)
+        public IQueryable<Usuario> GetUsuario([Service] AppDbContext context)
         {
-            return context.Usuarios;
+            return context.Usuario;
         }
 
-        [UseDbContext(typeof(AppDbContext))]
-        public Usuario GetUsuarioById([Service] AppDbContext context, int id)
+        public async Task<Usuario> GetUsuarioById([Service] AppDbContext context, int id)
         {
-            return context.Usuarios.FirstOrDefault(u => u.Id == id);
+            return await context.Usuario.FirstOrDefaultAsync(u => u.Id == id);
         }
     }
 }

@@ -22,20 +22,20 @@ namespace tcc_core.Controllers
         // GET: Material
         public async Task<IActionResult> Index()
         {
-              return _context.Materiais != null ? 
-                          View(await _context.Materiais.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Materiais'  is null.");
+              return _context.Material != null ? 
+                          View(await _context.Material.ToListAsync()) :
+                          Problem("Entity set 'AppDbContext.Material'  is null.");
         }
 
         // GET: Material/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Materiais == null)
+            if (id == null || _context.Material == null)
             {
                 return NotFound();
             }
 
-            var material = await _context.Materiais
+            var material = await _context.Material
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (material == null)
             {
@@ -70,12 +70,12 @@ namespace tcc_core.Controllers
         // GET: Material/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Materiais == null)
+            if (id == null || _context.Material == null)
             {
                 return NotFound();
             }
 
-            var material = await _context.Materiais.FindAsync(id);
+            var material = await _context.Material.FindAsync(id);
             if (material == null)
             {
                 return NotFound();
@@ -121,12 +121,12 @@ namespace tcc_core.Controllers
         // GET: Material/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Materiais == null)
+            if (id == null || _context.Material == null)
             {
                 return NotFound();
             }
 
-            var material = await _context.Materiais
+            var material = await _context.Material
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (material == null)
             {
@@ -141,14 +141,14 @@ namespace tcc_core.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Materiais == null)
+            if (_context.Material == null)
             {
-                return Problem("Entity set 'AppDbContext.Materiais'  is null.");
+                return Problem("Entity set 'AppDbContext.Material'  is null.");
             }
-            var material = await _context.Materiais.FindAsync(id);
+            var material = await _context.Material.FindAsync(id);
             if (material != null)
             {
-                _context.Materiais.Remove(material);
+                _context.Material.Remove(material);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +157,7 @@ namespace tcc_core.Controllers
 
         private bool MaterialExists(int id)
         {
-          return (_context.Materiais?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Material?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

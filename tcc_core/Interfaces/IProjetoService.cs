@@ -2,9 +2,9 @@
 
 namespace tcc_core.Interfaces
 {
-    public interface IProjetoRepository
+    public interface IProjetoService
     {
-        IEnumerable<Projeto> GetAllProjetos();
+        IEnumerable<Projeto> GetAllProjeto();
         Projeto GetProjetoById(int id);
         Projeto CreateProjeto(Projeto projeto);
         Projeto UpdateProjeto(int id, Projeto projeto);
