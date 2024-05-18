@@ -1,6 +1,6 @@
 ﻿using tcc_core.Models;
 
-namespace tcc_core.Interfaces
+namespace tcc_core.GraphQL.Interfaces
 {
     public interface IMovimentacaoMaterialService
     {

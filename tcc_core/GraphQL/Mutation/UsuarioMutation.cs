@@ -8,12 +8,12 @@ namespace tcc_core.Mutation
 {
     public class UsuarioMutation
     {
-        public async Task<Usuario> AddUsuario([Service] UsuarioService usuarioService, Usuario usuario)
+        public async Task<UsuarioModel> AddUsuario([Service] UsuarioService usuarioService, UsuarioModel usuario)
         {
             return await usuarioService.AddUsuarioAsync(usuario);
         }
 
-        public async Task<Usuario> UpdateUsuario([Service] UsuarioService usuarioService, int id, Usuario usuario)
+        public async Task<UsuarioModel> UpdateUsuario([Service] UsuarioService usuarioService, int id, UsuarioModel usuario)
         {
             return await usuarioService.UpdateUsuarioAsync(id, usuario);
         }

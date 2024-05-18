@@ -11,7 +11,7 @@ namespace tcc_core.Models
         public DateTime DtMovimentacao { get; set; }
 
         public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; } = new Usuario();
+        public UsuarioModel Usuario { get; set; } = new UsuarioModel();
 
         public int? ProjetoId { get; set; }
         public Projeto Projeto { get; set; } = new Projeto();

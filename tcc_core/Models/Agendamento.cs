@@ -20,6 +20,6 @@ namespace tcc_core.Models
         public Projeto Projeto { get; set; } = new Projeto();
 
         public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; } = new Usuario();
+        public UsuarioModel Usuario { get; set; } = new UsuarioModel();
     }
 }

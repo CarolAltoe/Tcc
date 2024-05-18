@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using tcc_core.Models;
-using tcc_core.Interfaces;
 using tcc_core.Data;
+using tcc_core.GraphQL.Interfaces;
 
 namespace tcc_core.Services
 {
@@ -14,17 +14,17 @@ namespace tcc_core.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Usuario>> GetAllUsuariosAsync()
+        public async Task<IEnumerable<UsuarioModel>> GetAllUsuariosAsync()
         {
             return await _context.Usuario.ToListAsync();
         }
 
-        public async Task<Usuario> GetUsuarioByIdAsync(int id)
+        public async Task<UsuarioModel> GetUsuarioByIdAsync(int id)
         {
             return await _context.Usuario.FindAsync(id);
         }
 
-        public async Task<Usuario> AddUsuarioAsync(Usuario usuario)
+        public async Task<UsuarioModel> AddUsuarioAsync(UsuarioModel usuario)
         {
             if (usuario == null)
             {
@@ -36,7 +36,7 @@ namespace tcc_core.Services
             return usuario;
         }
 
-        public async Task<Usuario> UpdateUsuarioAsync(int id, Usuario usuario)
+        public async Task<UsuarioModel> UpdateUsuarioAsync(int id, UsuarioModel usuario)
         {
             if (usuario == null)
             {

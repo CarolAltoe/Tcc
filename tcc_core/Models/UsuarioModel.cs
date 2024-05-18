@@ -2,7 +2,7 @@
 
 namespace tcc_core.Models
 {
-     public class Usuario
+     public class UsuarioModel
     {
         [Key]
         public int Id { get; set; }
@@ -10,7 +10,7 @@ namespace tcc_core.Models
         public string Email { get; set; } = string.Empty;
         public string Senha { get; set; } = string.Empty;
 
-        public ICollection<Agendamento> Agendamento { get; set; } = new List<Agendamento>();
-        public ICollection<Movimentacao> Movimentacao { get; set; } = new List<Movimentacao>();
+        public ICollection<Agendamento>? Agendamento { get; set; } = new List<Agendamento>();
+        public ICollection<Movimentacao>? Movimentacao { get; set; } = new List<Movimentacao>();
     }
 }

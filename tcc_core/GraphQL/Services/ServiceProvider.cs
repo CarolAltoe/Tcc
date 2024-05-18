@@ -1,5 +1,5 @@
 ﻿
-using tcc_core.Interfaces;
+using tcc_core.GraphQL.Interfaces;
 
 namespace tcc_core.Services
 {

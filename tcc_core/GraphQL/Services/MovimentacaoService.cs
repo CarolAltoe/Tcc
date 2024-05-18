@@ -1,7 +1,7 @@
 ﻿using tcc_core.Data;
-using tcc_core.Interfaces;
 using tcc_core.Models;
 using Microsoft.EntityFrameworkCore;
+using tcc_core.GraphQL.Interfaces;
 
 
 namespace tcc_core.Services
