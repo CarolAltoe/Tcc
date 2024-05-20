@@ -95,7 +95,8 @@ namespace tcc_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ResponsavelInterno,ResponsavelExterno,Turma,Descricao,Feedback,Observacoes,DtInicial,DtFinal,QtdPessoas,ProjetoId,UsuarioId")] Agendamento agendamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ResponsavelInterno,ResponsavelExterno,Turma," +
+            "Descricao,Feedback,Observacoes,DtInicial,DtFinal,QtdPessoas,ProjetoId,UsuarioId")] Agendamento agendamento)
         {
             if (id != agendamento.Id)
             {
@@ -104,6 +105,16 @@ namespace tcc_core.Controllers
 
             if (ModelState.IsValid)
             {
+                var projeto = await _context.Projeto.FindAsync(agendamento.ProjetoId);
+                var usuario = await _context.Usuario.FindAsync(agendamento.UsuarioId);
+
+                if (projeto == null || usuario == null)
+                {
+                    ModelState.AddModelError("", "Projeto ou Usuário não encontrado");
+                    ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", agendamento.ProjetoId);
+                    ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", agendamento.UsuarioId);
+                    return View(agendamento);
+                }
                 try
                 {
                     _context.Update(agendamento);

@@ -112,7 +112,7 @@ namespace tcc_core.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<string>("Responsavelonsavel")
+                    b.Property<string>("Responsavel")
                         .IsRequired()
                         .HasColumnType("longtext");
 

@@ -3,42 +3,50 @@
 @{
     ViewData["Title"] = "Editar Projeto";
 }
-
-<h1>@ViewData["Title"]</h1>
-
+<h1 class="text-center mt-5">@ViewData["Title"]</h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Coordenador" class="control-label"></label>
-                <input asp-for="Coordenador" class="form-control" />
-                <span asp-validation-for="Coordenador" class="text-danger"></span>
+
+<div class="row justify-content-center">
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="Coordenador" class="control-label">Coordenador:</label>
+                    <input asp-for="Coordenador" class="form-control" />
+                    <span asp-validation-for="Coordenador" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Titulo" class="control-label">Título:</label>
+                    <input asp-for="Titulo" class="form-control" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Natureza" class="control-label">Natureza:</label>
+                    <input asp-for="Natureza" class="form-control" />
+                    <span asp-validation-for="Natureza" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Natureza" class="control-label"></label>
-                <input asp-for="Natureza" class="form-control" />
-                <span asp-validation-for="Natureza" class="text-danger"></span>
+            <div class="col-md-6">
+
+                <div class="form-group mb-3">
+                    <label asp-for="DtInicio" class="control-label">Data de início:</label>
+                    <input asp-for="DtInicio" class="form-control" />
+                    <span asp-validation-for="DtInicio" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="DtFinal" class="control-label">Data de encerramento:</label>
+                    <input asp-for="DtFinal" class="form-control" />
+                    <span asp-validation-for="DtFinal" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DtInicio" class="control-label"></label>
-                <input asp-for="DtInicio" class="form-control" />
-                <span asp-validation-for="DtInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DtFinal" class="control-label"></label>
-                <input asp-for="DtFinal" class="form-control" />
-                <span asp-validation-for="DtFinal" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-success" /> |
-                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
-            </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-group mb-3 text-end">
+            <input type="submit" value="Editar" class="btn btn-success" /> |
+            <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+        </div>
+    </form>
+
 </div>
 
 

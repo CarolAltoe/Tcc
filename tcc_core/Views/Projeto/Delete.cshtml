@@ -4,38 +4,34 @@
     ViewData["Title"] = "Excluir Projeto";
 }
 
-<h1>@ViewData["Title"]</h1>
+
+<h1 class="text-center">@ViewData["Title"]</h1>
 <hr />
-<h4>Tem certeza que deseja excluir o projeto abaixo?</h4>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Coordenador)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Coordenador)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Natureza)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Natureza)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DtInicio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DtInicio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DtFinal)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DtFinal)
-        </dd>
-    </dl>
-    
+<h4 class="text-center">Tem certeza que deseja excluir o usuário abaixo?</h4>
+
+<div class="container d-flex justify-content-center">
+    <div class="w-75 mx-auto">
+        <hr />
+        <dl class="row ">
+            <dt class="col-sm-3 text-start">Coordenador:</dt>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Coordenador)</dd>
+
+            <dt class="col-sm-3 text-start">Titulo:</dt>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Titulo)</dd>
+
+            <dt class="col-sm-3 text-start">Natureza:</dt>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Natureza)</dd>
+
+            <dt class="col-sm-3 text-start">Data de início:</dt>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.DtInicio)</dd>
+
+            <dt class="col-sm-3 text-start">Data de encerramento:</dt>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.DtFinal)</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="text-center mt-4">
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Excluir" class="btn btn-danger" /> |

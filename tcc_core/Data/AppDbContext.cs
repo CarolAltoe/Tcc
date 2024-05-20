@@ -18,28 +18,32 @@ namespace tcc_core.Data
         public DbSet<Movimentacao> Movimentacao { get; set; }
         public DbSet<MovimentacaoMaterial> MovimentacaoMaterial{ get; set; }
         public DbSet<UserTeste> UserTestes{ get; set; }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Agendamento>()
                 .HasOne(a => a.Projeto)
                 .WithMany(p => p.Agendamento)
-                .HasForeignKey(a => a.ProjetoId);
+                .HasForeignKey(a => a.ProjetoId)
+                .OnDelete(DeleteBehavior.Restrict); // Evite exclusão em cascata
 
             modelBuilder.Entity<Agendamento>()
                 .HasOne(a => a.Usuario)
                 .WithMany(u => u.Agendamento)
-                .HasForeignKey(a => a.UsuarioId);
+                .HasForeignKey(a => a.UsuarioId)
+                .OnDelete(DeleteBehavior.Restrict); // Evite exclusão em cascata
 
             modelBuilder.Entity<Movimentacao>()
                 .HasOne(m => m.Projeto)
                 .WithMany(p => p.Movimentacao)
-                .HasForeignKey(m => m.ProjetoId);
+                .HasForeignKey(m => m.ProjetoId)
+                .OnDelete(DeleteBehavior.Restrict); // Evite exclusão em cascata
 
             modelBuilder.Entity<Movimentacao>()
                 .HasOne(m => m.Usuario)
                 .WithMany(u => u.Movimentacao)
-                .HasForeignKey(m => m.UsuarioId);
+                .HasForeignKey(m => m.UsuarioId)
+                .OnDelete(DeleteBehavior.Restrict); // Evite exclusão em cascata
 
             modelBuilder.Entity<MovimentacaoMaterial>()
                 .HasKey(mm => new { mm.MovimentacaoId, mm.MaterialId });
@@ -54,6 +58,8 @@ namespace tcc_core.Data
                 .WithMany(m => m.MovimentacaoMaterial)
                 .HasForeignKey(mm => mm.MaterialId);
         }
+
+
     }
 
 }

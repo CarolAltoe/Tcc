@@ -4,45 +4,35 @@
     ViewData["Title"] = "Excluir Movimentação";
 }
 
-<h1>@ViewData["Title"]</h1>
-<hr />
-<h4>Tem certeza que deseja excluir a movimentação abaixo?</h4>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Responsavelonsavel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Responsavelonsavel)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoMovimentacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoMovimentacao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DtMovimentacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DtMovimentacao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Usuario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Usuario.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Projeto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Projeto.Id)
-        </dd>
-    </dl>
-    
+<h1 class="text-center">@ViewData["Title"]</h1>
+<hr />
+<h4 class="text-center">Tem certeza que deseja excluir o usuário abaixo?</h4>
+
+
+<div class="container d-flex justify-content-center">
+    <div class="w-75 mx-auto">
+        <hr />
+        <dl class="row ">
+            <dt class="col-sm-3 text-start">Responsável pela movimentação:</dt>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Responsavel)</dd>
+
+            <dt class="col-sm-3 text-start">Tipo da movimentação:</dt>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.TipoMovimentacao)</dd>
+
+            <dt class="col-sm-3 text-start">Data da movimentação:</dt>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.DtMovimentacao)</dd>
+
+            <dt class="col-sm-3 text-start">Usuário:</dt>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Usuario.Id)</dd>
+
+            <dt class="col-sm-3 text-start">Projeto:</dt>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Projeto.Id)</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="text-center mt-4">
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Excluir" class="btn btn-danger" /> |

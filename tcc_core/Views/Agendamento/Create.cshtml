@@ -1,71 +1,78 @@
 ﻿@model tcc_core.Models.Agendamento
 
 @{
-    ViewData["Title"] = "Cadastar Agendamento";
+    ViewData["Title"] = "Cadastrar Agendamento";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="text-center mt-5">@ViewData["Title"]</h1>
 <hr />
 
-<div class="row">
-    <div class="col-md-4">
+<div class="container d-flex justify-content-center">
+    <div class="w-75">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ResponsavelInterno" class="control-label"></label>
-                <input asp-for="ResponsavelInterno" class="form-control" />
-                <span asp-validation-for="ResponsavelInterno" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label asp-for="ResponsavelInterno" class="control-label">Responsável interno: (Quem recebe a visita)</label>
+                        <input asp-for="ResponsavelInterno" class="form-control" />
+                        <span asp-validation-for="ResponsavelInterno" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="ResponsavelExterno" class="control-label">Responsável externo: (Quem solicita a visita)</label>
+                        <input asp-for="ResponsavelExterno" class="form-control" />
+                        <span asp-validation-for="ResponsavelExterno" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Turma" class="control-label">Turma</label>
+                        <input asp-for="Turma" class="form-control" />
+                        <span asp-validation-for="Turma" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="DtInicial" class="control-label">Data de início:</label>
+                        <input asp-for="DtInicial" class="form-control" />
+                        <span asp-validation-for="DtInicial" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="DtFinal" class="control-label">Data final: </label>
+                        <input asp-for="DtFinal" class="form-control" />
+                        <span asp-validation-for="DtFinal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="QtdPessoas" class="control-label">Quantidade de pessoas:</label>
+                        <input asp-for="QtdPessoas" class="form-control" />
+                        <span asp-validation-for="QtdPessoas" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="UsuarioId" class="control-label">Usuário: </label>
+                        <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
+                        <span asp-validation-for="UsuarioId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label asp-for="ProjetoId" class="control-label">Projeto: </label>
+                        <select asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId"></select>
+                        <span asp-validation-for="ProjetoId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Descricao" class="control-label">Descrição:</label>
+                        <textarea asp-for="Descricao" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Feedback" class="control-label">Feedback: </label>
+                        <textarea asp-for="Feedback" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Feedback" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Observacoes" class="control-label">Observações: </label>
+                        <textarea asp-for="Observacoes" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Observacoes" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ResponsavelExterno" class="control-label"></label>
-                <input asp-for="ResponsavelExterno" class="form-control" />
-                <span asp-validation-for="ResponsavelExterno" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Turma" class="control-label"></label>
-                <input asp-for="Turma" class="form-control" />
-                <span asp-validation-for="Turma" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Feedback" class="control-label"></label>
-                <input asp-for="Feedback" class="form-control" />
-                <span asp-validation-for="Feedback" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Observacoes" class="control-label"></label>
-                <input asp-for="Observacoes" class="form-control" />
-                <span asp-validation-for="Observacoes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DtInicial" class="control-label"></label>
-                <input asp-for="DtInicial" class="form-control" />
-                <span asp-validation-for="DtInicial" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DtFinal" class="control-label"></label>
-                <input asp-for="DtFinal" class="form-control" />
-                <span asp-validation-for="DtFinal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="QtdPessoas" class="control-label"></label>
-                <input asp-for="QtdPessoas" class="form-control" />
-                <span asp-validation-for="QtdPessoas" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProjetoId" class="control-label"></label>
-                <select asp-for="ProjetoId" class ="form-control" asp-items="ViewBag.ProjetoId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="UsuarioId" class="control-label"></label>
-                <select asp-for="UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
-            </div>
-            <br />
-            <div class="form-group">
+            <div class="form-group mb-3 ">
                 <input type="submit" value="Cadastrar" class="btn btn-success" /> |
                 <a asp-action="Index" class="btn btn-secondary">Voltar</a>
             </div>
@@ -73,6 +80,9 @@
     </div>
 </div>
 
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

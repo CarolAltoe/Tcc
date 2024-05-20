@@ -106,7 +106,7 @@ namespace tcc_core.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Responsavelonsavel = table.Column<string>(type: "longtext", nullable: false),
+                    Responsavel = table.Column<string>(type: "longtext", nullable: false),
                     TipoMovimentacao = table.Column<string>(type: "longtext", nullable: false),
                     DtMovimentacao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),

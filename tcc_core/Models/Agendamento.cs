@@ -10,16 +10,16 @@ namespace tcc_core.Models
         public string ResponsavelExterno { get; set; } = string.Empty;
         public string Turma { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;
-        public string Feedback { get; set; } = string.Empty;
-        public string Observacoes { get; set; } = string.Empty;
+        public string? Feedback { get; set; } = string.Empty;
+        public string? Observacoes { get; set; } = string.Empty;
         public DateTime DtInicial { get; set; }
         public DateTime DtFinal { get; set; }
         public int QtdPessoas { get; set; }
 
         public int? ProjetoId { get; set; }
-        public Projeto Projeto { get; set; } = new Projeto();
+        public Projeto? Projeto { get; set; }
 
         public int UsuarioId { get; set; }
-        public UsuarioModel Usuario { get; set; } = new UsuarioModel();
+        public UsuarioModel? Usuario { get; set; }
     }
 }

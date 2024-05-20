@@ -49,8 +49,8 @@ namespace tcc_core.Controllers
         // GET: Movimentacao/Create
         public IActionResult Create()
         {
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id");
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id");
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace tcc_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Responsavelonsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao)
+        public async Task<IActionResult> Create([Bind("Id,Responsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,8 @@ namespace tcc_core.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", movimentacao.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", movimentacao.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", movimentacao.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", movimentacao.UsuarioId);
             return View(movimentacao);
         }
 
@@ -85,8 +85,8 @@ namespace tcc_core.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", movimentacao.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", movimentacao.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", movimentacao.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", movimentacao.UsuarioId);
             return View(movimentacao);
         }
 
@@ -95,7 +95,7 @@ namespace tcc_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Responsavelonsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Responsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao)
         {
             if (id != movimentacao.Id)
             {
@@ -122,8 +122,8 @@ namespace tcc_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", movimentacao.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", movimentacao.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", movimentacao.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", movimentacao.UsuarioId);
             return View(movimentacao);
         }
 
