@@ -5,11 +5,11 @@ namespace tcc_core.Models
 {
     public class MovimentacaoMaterial
     {
-        [Key]
+        [Key, Column(Order = 0)]
         public int MovimentacaoId { get; set; }
         public Movimentacao Movimentacao { get; set; }
 
-        [Key]
+        [Key, Column(Order = 1)]
         public int MaterialId { get; set; }
         public Material Material { get; set; } 
 

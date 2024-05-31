@@ -26,18 +26,21 @@ namespace tcc_core.Controllers
             return View(await appDbContext.ToListAsync());
         }
 
-        // GET: Movimentacao/Details/5
+        // Método para GET de Detalhes da Movimentação
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Movimentacao == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var movimentacao = await _context.Movimentacao
-                .Include(m => m.Projeto)
                 .Include(m => m.Usuario)
+                .Include(m => m.Projeto)
+                .Include(m => m.MovimentacaoMaterial)
+                    .ThenInclude(mm => mm.Material)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (movimentacao == null)
             {
                 return NotFound();
@@ -46,56 +49,71 @@ namespace tcc_core.Controllers
             return View(movimentacao);
         }
 
-        // GET: Movimentacao/Create
         public IActionResult Create()
         {
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo");
             ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto");
+            ViewBag.Materiais = new SelectList(_context.Material, "Id", "Descricao");
             return View();
         }
 
-        // POST: Movimentacao/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Responsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao)
+        public async Task<IActionResult> Create([Bind("Id,Responsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao, int[] MovimentacaoMaterial_MaterialId, decimal[] MovimentacaoMaterial_Quantidade)
         {
             if (ModelState.IsValid)
             {
+                for (int i = 0; i < MovimentacaoMaterial_MaterialId.Length; i++)
+                {
+                    movimentacao.MovimentacaoMaterial.Add(new MovimentacaoMaterial
+                    {
+                        MaterialId = MovimentacaoMaterial_MaterialId[i],
+                        Quantidade = MovimentacaoMaterial_Quantidade[i]
+                    });
+                }
+
                 _context.Add(movimentacao);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", movimentacao.ProjetoId);
             ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", movimentacao.UsuarioId);
+            ViewBag.Materiais = new SelectList(_context.Material, "Id", "Descricao");
             return View(movimentacao);
         }
 
-        // GET: Movimentacao/Edit/5
+        // Método para GET de Editar Movimentação
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Movimentacao == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var movimentacao = await _context.Movimentacao.FindAsync(id);
+            var movimentacao = await _context.Movimentacao
+                .Include(m => m.Usuario)
+                .Include(m => m.Projeto)
+                .Include(m => m.MovimentacaoMaterial)
+                    .ThenInclude(mm => mm.Material)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (movimentacao == null)
             {
                 return NotFound();
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", movimentacao.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", movimentacao.UsuarioId);
+
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto");
+            ViewData["Materiais"] = new SelectList(_context.Material, "Id", "Descricao");
+
             return View(movimentacao);
         }
 
-        // POST: Movimentacao/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Método para POST de Editar Movimentação
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Responsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Responsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId,MovimentacaoMaterial")] Movimentacao movimentacao, [FromForm] List<int> MovimentacaoMaterial_MaterialId, [FromForm] List<int> MovimentacaoMaterial_Quantidade)
         {
             if (id != movimentacao.Id)
             {
@@ -106,7 +124,24 @@ namespace tcc_core.Controllers
             {
                 try
                 {
+                    // Atualiza os campos principais da movimentação
                     _context.Update(movimentacao);
+
+                    // Atualiza os materiais associados
+                    var existingMaterials = _context.MovimentacaoMaterial.Where(mm => mm.MovimentacaoId == movimentacao.Id).ToList();
+                    _context.MovimentacaoMaterial.RemoveRange(existingMaterials);
+
+                    for (int i = 0; i < MovimentacaoMaterial_MaterialId.Count; i++)
+                    {
+                        var newMaterial = new MovimentacaoMaterial
+                        {
+                            MovimentacaoId = movimentacao.Id,
+                            MaterialId = MovimentacaoMaterial_MaterialId[i],
+                            Quantidade = MovimentacaoMaterial_Quantidade[i]
+                        };
+                        _context.MovimentacaoMaterial.Add(newMaterial);
+                    }
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -122,23 +157,31 @@ namespace tcc_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", movimentacao.ProjetoId);
             ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", movimentacao.UsuarioId);
+            ViewData["Materiais"] = new SelectList(_context.Material, "Id", "Descricao");
+
             return View(movimentacao);
         }
 
-        // GET: Movimentacao/Delete/5
+      
+
+        // Método para GET de Excluir Movimentação
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Movimentacao == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var movimentacao = await _context.Movimentacao
-                .Include(m => m.Projeto)
                 .Include(m => m.Usuario)
+                .Include(m => m.Projeto)
+                .Include(m => m.MovimentacaoMaterial)
+                    .ThenInclude(mm => mm.Material)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (movimentacao == null)
             {
                 return NotFound();
@@ -147,28 +190,26 @@ namespace tcc_core.Controllers
             return View(movimentacao);
         }
 
-        // POST: Movimentacao/Delete/5
+        // Método para POST de Excluir Movimentação
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Movimentacao == null)
-            {
-                return Problem("Entity set 'AppDbContext.Movimentacao'  is null.");
-            }
             var movimentacao = await _context.Movimentacao.FindAsync(id);
-            if (movimentacao != null)
-            {
-                _context.Movimentacao.Remove(movimentacao);
-            }
-            
+            var movimentacaoMateriais = _context.MovimentacaoMaterial.Where(mm => mm.MovimentacaoId == id);
+
+            _context.MovimentacaoMaterial.RemoveRange(movimentacaoMateriais);
+            _context.Movimentacao.Remove(movimentacao);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool MovimentacaoExists(int id)
         {
-          return (_context.Movimentacao?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.Movimentacao.Any(e => e.Id == id);
         }
+
     }
+
 }

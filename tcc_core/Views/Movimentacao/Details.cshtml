@@ -6,25 +6,44 @@
 
 <h1 class="text-center mt-5">@ViewData["Title"]</h1>
 
+
 <div class="container d-flex justify-content-center">
     <div class="w-75 mx-auto">
         <hr />
-        <dl class="row ">
-            <dt class="col-sm-3 text-start">Responsável pela movimentação:</dt>
+        <dl class="row">
+            <dt class="col-sm-3 text-start">Responsável:</dt>
             <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Responsavel)</dd>
 
-            <dt class="col-sm-3 text-start">Tipo da movimentação:</dt>
+            <dt class="col-sm-3 text-start">Tipo:</dt>
             <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.TipoMovimentacao)</dd>
 
-            <dt class="col-sm-3 text-start">Data da movimentação:</dt>
+            <dt class="col-sm-3 text-start">Data:</dt>
             <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.DtMovimentacao)</dd>
 
             <dt class="col-sm-3 text-start">Usuário:</dt>
-            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Usuario.Id)</dd>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Usuario.NomeCompleto)</dd>
 
             <dt class="col-sm-3 text-start">Projeto:</dt>
-            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Projeto.Id)</dd>
+            <dd class="col-sm-9 text-end">@Html.DisplayFor(model => model.Projeto.Titulo)</dd>
         </dl>
+
+        <table class="table">
+            <thead class="">
+                <tr>
+                    <th class="text-start">Material</th>
+                    <th class="text-end">Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.MovimentacaoMaterial)
+                {
+                    <tr>
+                        <td class="text-start">@item.Material.Descricao</td>
+                        <td class="text-end">@item.Quantidade</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -32,4 +51,3 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Editar</a> |
     <a asp-action="Index" class="btn btn-secondary">Voltar</a>
 </div>
-

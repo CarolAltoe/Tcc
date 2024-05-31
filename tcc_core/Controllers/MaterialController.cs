@@ -56,7 +56,7 @@ namespace tcc_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descricao,Classificacao,QuantidadeAtual")] Material material)
+        public async Task<IActionResult> Create([Bind("Descricao,Classificacao,QuantidadeAtual")] Material material)
         {
             if (ModelState.IsValid)
             {

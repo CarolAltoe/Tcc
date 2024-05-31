@@ -51,6 +51,7 @@ namespace tcc_core.Controllers
         {
             ViewData["MaterialId"] = new SelectList(_context.Material, "Id", "Id");
             ViewData["MovimentacaoId"] = new SelectList(_context.Movimentacao, "Id", "Id");
+            ViewData["MaterialId"] = new SelectList(_context.Material, "Id", "Descricao"); // Adicionado para carregar os materiais disponíveis
             return View();
         }
 
@@ -59,17 +60,33 @@ namespace tcc_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovimentacaoId,MaterialId,Quantidade")] MovimentacaoMaterial movimentacaoMaterial)
+        public async Task<IActionResult> Create([Bind("Id,Responsavel,TipoMovimentacao,DtMovimentacao,UsuarioId,ProjetoId")] Movimentacao movimentacao, int[] materialIds, decimal[] quantidades)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movimentacaoMaterial);
+                _context.Add(movimentacao);
                 await _context.SaveChangesAsync();
+
+                // Adiciona os materiais associados à movimentação
+                for (int i = 0; i < materialIds.Length; i++)
+                {
+                    var movimentacaoMaterial = new MovimentacaoMaterial
+                    {
+                        MovimentacaoId = movimentacao.Id,
+                        MaterialId = materialIds[i],
+                        Quantidade = quantidades[i]
+                    };
+                    _context.Add(movimentacaoMaterial);
+                }
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaterialId"] = new SelectList(_context.Material, "Id", "Id", movimentacaoMaterial.MaterialId);
-            ViewData["MovimentacaoId"] = new SelectList(_context.Movimentacao, "Id", "Id", movimentacaoMaterial.MovimentacaoId);
-            return View(movimentacaoMaterial);
+
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", movimentacao.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", movimentacao.UsuarioId);
+            ViewData["MaterialId"] = new SelectList(_context.Material, "Id", "Descricao"); // Adicionado para carregar os materiais disponíveis
+            return View(movimentacao);
         }
 
         // GET: MovimentacaoMaterial/Edit/5

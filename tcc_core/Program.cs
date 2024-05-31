@@ -1,22 +1,33 @@
 using tcc_core.Data;
 using Microsoft.EntityFrameworkCore;
-using tcc_core.Mutation;
-using tcc_core.Query;
-using System;
-using tcc_core.GraphQL.Interfaces;
-using tcc_core.Services;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using tcc_core.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddServices();
-
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDefaultIdentity<UsuarioModel>(options =>
+    options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<AppDbContext>();
+
+
+// Define a cultura padrão (pt-BR)
+var defaultCulture = new CultureInfo("pt-BR");
+var localizationOptions = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(defaultCulture),
+    SupportedCultures = new List<CultureInfo> { defaultCulture },
+    SupportedUICultures = new List<CultureInfo> { defaultCulture }
+};
 
 var app = builder.Build();
 
@@ -38,10 +49,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}"
-    );
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 //Migrations
 using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
@@ -51,37 +64,3 @@ context.Database.Migrate();
 app.Run();
 
 
-
-/*
-
-
-builder.Services.AddGraphQLServer()
-    .AddQueryType<UsuarioQuery>()
-    .AddQueryType<ProjetoQuery>()
-    .AddQueryType<MaterialQuery>()
-    .AddQueryType<AgendamentoQuery>()
-    .AddQueryType<MovimentacaoQuery>()
-    .AddMutationType<UsuarioMutation>()
-    .AddMutationType<ProjetoMutation>()
-    .AddMutationType<MaterialMutation>()
-    .AddMutationType<AgendamentoMutation>()
-    .AddMutationType<MovimentacaoMutation>()
-    .AddProjections()
-    .AddFiltering()
-    .AddSorting()
-    .AddQueryType<TesteQuery>()
-    .AddType<UserTesteType>()
-    .AddMutationType<TesteMutation>()
-    .AddType<MutationType>();
-           
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-    endpoints.MapGraphQL();
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}"
-    );
-});
-
-*/

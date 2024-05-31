@@ -1,7 +1,7 @@
 ﻿@model tcc_core.Models.Material
 
 @{
-    ViewData["Title"] = "Cadastar Material";
+    ViewData["Title"] = "Cadastrar Material";
 }
 
 <h1 class="text-center">@ViewData["Title"]</h1>
@@ -21,13 +21,13 @@
                 <input asp-for="Classificacao" class="form-control" />
                 <span asp-validation-for="Classificacao" class="text-danger"></span>
             </div>
-            <div class="form-group mb-3">
+           @*  <div class="form-group mb-3">
                 <label asp-for="QuantidadeAtual" class="control-label">Quantidade atual:</label>
-                <input asp-for="QuantidadeAtual" class="form-control" />
+                <input asp-for="QuantidadeAtual" class="form-control" type="number" step="0.01" />
                 <span asp-validation-for="QuantidadeAtual" class="text-danger"></span>
-            </div>
+            </div> *@
             <br />
-            <div class="form-group mb-3 text-end">
+            <div class="form-group mb-3 text-center">
                 <input type="submit" value="Cadastrar" class="btn btn-success" /> |
                 <a asp-action="Index" class="btn btn-secondary">Voltar</a>
             </div>

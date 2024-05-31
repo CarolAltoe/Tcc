@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label asp-for="Responsavel" class="control-label">Responsável pela movimentação:</label>
+                        <label asp-for="Responsavel" class="control-label">Responsável: (Quem solicita a movimentação)</label>
                         <input asp-for="Responsavel" class="form-control" />
                         <span asp-validation-for="Responsavel" class="text-danger"></span>
                     </div>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group mb-3 text-end">
+            <div class="form-group mb-3 text-center">
                 <input type="submit" value="Editar" class="btn btn-success" /> |
                 <a asp-action="Index" class="btn btn-secondary">Voltar</a>
             </div>

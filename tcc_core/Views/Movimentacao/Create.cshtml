@@ -1,7 +1,7 @@
 ﻿@model tcc_core.Models.Movimentacao
 
 @{
-    ViewData["Title"] = "Cadastar Movimentação";
+    ViewData["Title"] = "Cadastrar Movimentação";
 }
 
 <h1 class="text-center mt-5">@ViewData["Title"]</h1>
@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label asp-for="Responsavel" class="control-label">Responsável pela movimentação:</label>
+                        <label asp-for="Responsavel" class="control-label">Responsável: (Quem solicita a movimentação)</label>
                         <input asp-for="Responsavel" class="form-control" />
                         <span asp-validation-for="Responsavel" class="text-danger"></span>
                     </div>
@@ -40,7 +40,23 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group mb-3 text-end">
+            <div class="form-group mb-3">
+                <h5>Materiais:</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Material</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="materiaisTableBody">
+                        <!-- As linhas dos materiais serão adicionadas via JavaScript -->
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-primary" id="addMaterialBtn">Adicionar Material</button>
+            </div>
+            <div class="form-group mb-3 text-center">
                 <input type="submit" value="Cadastrar" class="btn btn-success" /> |
                 <a asp-action="Index" class="btn btn-secondary">Voltar</a>
             </div>
@@ -48,9 +64,37 @@
     </div>
 </div>
 
-
-
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.getElementById('addMaterialBtn').addEventListener('click', function () {
+            var materiaisTableBody = document.getElementById('materiaisTableBody');
+            var newRow = document.createElement('tr');
+
+            newRow.innerHTML = `
+                        <td>
+                            <select name="MovimentacaoMaterial_MaterialId" class="form-control">
+                                @foreach (var material in (SelectList)ViewBag.Materiais)
+                                {
+                                   <option value="@material.Value">@material.Text</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="MovimentacaoMaterial_Quantidade" class="form-control" />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger removeMaterialBtn">Remover</button>
+                        </td>
+                    `;
+            materiaisTableBody.appendChild(newRow);
+
+            // Adicionar evento de remoção à nova linha
+            newRow.querySelector('.removeMaterialBtn').addEventListener('click', function () {
+                newRow.remove();
+            });
+        });
+    </script>
 }

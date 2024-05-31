@@ -1,4 +1,8 @@
-﻿@model tcc_core.Models.UsuarioModel
+﻿
+
+
+
+@model tcc_core.Models.UsuarioModel
 
 @{
     ViewData["Title"] = "Editar Usuário";
@@ -11,7 +15,6 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group mb-3">
                 <label asp-for="NomeCompleto" class="control-label">Nome Completo:</label>
                 <input asp-for="NomeCompleto" class="form-control" />
@@ -28,8 +31,8 @@
                 <span asp-validation-for="Senha" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group mb-3 ">
-                <input type="submit" value="Salvar" class="btn btn-success" /> |
+            <div class="form-group mb-3 text-center">
+                <input type="submit" value="Editar" class="btn btn-success" /> |
                 <a asp-action="Index" class="btn btn-secondary">Voltar</a>
             </div>
         </form>

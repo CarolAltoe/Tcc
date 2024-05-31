@@ -49,8 +49,8 @@ namespace tcc_core.Controllers
         // GET: Agendamento/Create
         public IActionResult Create()
         {
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id");
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id");
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace tcc_core.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", agendamento.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", agendamento.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", agendamento.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", agendamento.UsuarioId);
             return View(agendamento);
         }
 
@@ -85,8 +85,8 @@ namespace tcc_core.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", agendamento.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", agendamento.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", agendamento.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", agendamento.UsuarioId);
             return View(agendamento);
         }
 
@@ -111,8 +111,8 @@ namespace tcc_core.Controllers
                 if (projeto == null || usuario == null)
                 {
                     ModelState.AddModelError("", "Projeto ou Usuário não encontrado");
-                    ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", agendamento.ProjetoId);
-                    ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", agendamento.UsuarioId);
+                    ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", agendamento.ProjetoId);
+                    ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", agendamento.UsuarioId);
                     return View(agendamento);
                 }
                 try
@@ -133,8 +133,8 @@ namespace tcc_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Id", agendamento.ProjetoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", agendamento.UsuarioId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", agendamento.ProjetoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", agendamento.UsuarioId);
             return View(agendamento);
         }
 
