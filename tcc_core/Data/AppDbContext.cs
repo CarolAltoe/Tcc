@@ -17,7 +17,6 @@ namespace tcc_core.Data
         public DbSet<Material> Material { get; set; }
         public DbSet<Movimentacao> Movimentacao { get; set; }
         public DbSet<MovimentacaoMaterial> MovimentacaoMaterial{ get; set; }
-        public DbSet<UserTeste> UserTestes{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,7 +1,7 @@
-﻿@model tcc_core.Models.UsuarioModel
+﻿@model tcc_core.Models.LoginViewModel
 
 @{
-    ViewData["Title"] = "Registre-se";
+    ViewData["Title"] = "Login";
 }
 
 <h1 class="text-center">@ViewData["Title"]</h1>
@@ -9,13 +9,8 @@
 
 <div class="row justify-content-center">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group mb-3">
-                <label asp-for="NomeCompleto" class="control-label">Nome Completo:</label>
-                <input asp-for="NomeCompleto" class="form-control" />
-                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
-            </div>
             <div class="form-group mb-3">
                 <label asp-for="Email" class="control-label">E-mail:</label>
                 <input asp-for="Email" class="form-control" />
@@ -28,7 +23,8 @@
             </div>
             <br />
             <div class="form-group mb-3 text-center">
-                <input type="submit" value="Registrar" class="btn btn-success" />
+                <input type="submit" value="Entrar" class="btn btn-success" /> |
+                <a asp-controller="Usuario" asp-action="Create" class="btn btn-secondary">Registre-se</a>
             </div>
         </form>
     </div>
