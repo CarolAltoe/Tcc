@@ -1,16 +1,15 @@
-﻿
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 using tcc_core.Data;
 using tcc_core.Models;
 
 namespace tcc_core.Controllers
 {
-    [Authorize]
     public class UsuarioController : Controller
     {
         private readonly AppDbContext _context;
@@ -18,77 +17,6 @@ namespace tcc_core.Controllers
         public UsuarioController(AppDbContext context)
         {
             _context = context;
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var usuario = _context.Usuario
-                .FirstOrDefault(u => u.Email == model.Email && u.Senha == model.Senha);
-
-            if (usuario == null)
-            {
-                ModelState.AddModelError("", "Usuário ou senha inválidos");
-                return View(model);
-            }
-
-            var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, usuario.Email)
-        };
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var authProperties = new AuthenticationProperties
-            {
-                // Configurações adicionais de autenticação, se necessário
-            };
-
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-
-            return RedirectToAction("Index", "Home");
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NomeCompleto,Email,Senha")] UsuarioModel usuarioModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(usuarioModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Login));
-            }
-
-            return View(usuarioModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction(nameof(Login));
         }
 
         // GET: Usuario
@@ -117,6 +45,27 @@ namespace tcc_core.Controllers
             return View(usuarioModel);
         }
 
+        // GET: Usuario/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Usuario/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,NomeCompleto,Email,Senha")] UsuarioModel usuarioModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(usuarioModel);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(usuarioModel);
+        }
 
         // GET: Usuario/Edit/5
         public async Task<IActionResult> Edit(int? id)

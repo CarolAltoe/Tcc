@@ -3,20 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using tcc_core.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-        .AddCookie(options =>
-        {
-            options.LoginPath = "/Usuario/Login";
-            options.LogoutPath = "/Usuario/Logout";
-            options.AccessDeniedPath = "/Usuario/AcessoNegado";
-        }); ;
-
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSwaggerGen();
@@ -24,9 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//builder.Services.AddDefaultIdentity<UsuarioModel>(options =>
-//    options.SignIn.RequireConfirmedAccount = false)
-//    .AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddDefaultIdentity<UsuarioModel>(options =>
+    options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<AppDbContext>();
 
 
 // Define a cultura padrão (pt-BR)
@@ -41,13 +32,10 @@ var localizationOptions = new RequestLocalizationOptions
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-else
+if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -59,15 +47,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Usuario}/{action=Login}/{id?}");
-    // pattern: "{controller=Home}/{action=Login}/{id?}");
+        pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
 //Migrations

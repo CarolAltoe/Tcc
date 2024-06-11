@@ -13,8 +13,6 @@ namespace tcc_core.Models
         public string ResponsavelExterno { get; set; } = string.Empty;
         [Required(ErrorMessage = "A turma é obrigatória.")]
         public string Turma { get; set; } = string.Empty;
-
-        [Required(ErrorMessage = "A descrição é obrigatória.")]
         public string Descricao { get; set; } = string.Empty;
         public string? Feedback { get; set; } = string.Empty;
         public string? Observacoes { get; set; } = string.Empty;
@@ -29,7 +27,7 @@ namespace tcc_core.Models
         public Projeto? Projeto { get; set; }
 
         [ForeignKey("Usuario")]
-        public int UsuarioId { get; set; }
+        public string UsuarioId { get; set; }
         public UsuarioModel? Usuario { get; set; }
     }
 }
