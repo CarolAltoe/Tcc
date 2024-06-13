@@ -1,6 +1,7 @@
 # Ignore build results
 bin/
 obj/
+tcc_core/obj/Debug/net8.0/
 
 # Ignore user-specific files
 *.user
@@ -36,6 +37,5 @@ Thumbs.db
 *.dylib
 *.pdb
 
-.vs/tcc_core/
-
+/.vs/tcc_core
 
