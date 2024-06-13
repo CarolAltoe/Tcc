@@ -1,0 +1,41 @@
+# Ignore build results
+bin/
+obj/
+tcc_core/obj/Debug/net8.0/
+
+# Ignore user-specific files
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+*.suo
+
+# Ignore Visual Studio Code workspace settings
+.vscode/
+
+# Ignore Rider IDE settings
+.idea/
+
+# Ignore application configuration files
+appsettings*.json
+
+# Ignore logs
+*.log
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore NuGet packages
+*.nupkg
+*.snupkg
+
+# Ignore compiled DLLs
+*.dll
+*.exe
+*.so
+*.dylib
+*.pdb
+
+/.vs/tcc_core
+
