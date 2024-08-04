@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using tcc_core.Models;
 
 namespace tcc_core.Controllers
 {
+    [Authorize]
     public class MaterialController : Controller
     {
         private readonly AppDbContext _context;
@@ -20,11 +22,27 @@ namespace tcc_core.Controllers
         }
 
         // GET: Material
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-              return _context.Material != null ? 
-                          View(await _context.Material.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Material'  is null.");
+            ViewData["CurrentFilter"] = searchTerm;
+
+            var materials = from m in _context.Material
+                            select m;
+
+            if (!String.IsNullOrEmpty(searchTerm))
+            {
+                materials = materials.Where(s => s.Descricao.Contains(searchTerm));
+            }
+
+            var materialList = await materials.ToListAsync();
+            if (!materialList.Any())
+            {
+                ViewData["Message"] = !String.IsNullOrEmpty(searchTerm) ?
+                                      "Nenhum material encontrado para o termo pesquisado." :
+                                      "Nenhum material cadastrado.";
+            }
+
+            return View(await materials.ToListAsync());
         }
 
         // GET: Material/Details/5

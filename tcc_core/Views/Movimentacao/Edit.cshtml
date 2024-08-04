@@ -1,4 +1,5 @@
-﻿@model tcc_core.Models.Movimentacao
+﻿
+@model tcc_core.Models.Movimentacao
 
 @{
     ViewData["Title"] = "Editar Movimentação";
@@ -10,6 +11,177 @@
 
 <div class="container d-flex justify-content-center">
     <div class="w-75">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="Responsavel" class="control-label"></label>
+                        <input asp-for="Responsavel" class="form-control" />
+                        <span asp-validation-for="Responsavel" class="text-danger"></span>
+                    </div>
+                    <div class="form-group  mb-3">
+                        <label asp-for="TipoMovimentacao" class="control-label"></label>
+                        <select asp-for="TipoMovimentacao" class="form-control">
+                            <option value="">Selecione</option>
+                            @foreach (var item in Enum.GetValues(typeof(tcc_core.Models.Enuns.TipoMovimentacao)))
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TipoMovimentacao" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3 ">
+                        <label asp-for="DtMovimentacao" class="control-label"></label>
+                        <input asp-for="DtMovimentacao" class="form-control" />
+                        <span asp-validation-for="DtMovimentacao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label asp-for="UsuarioId" class="control-label">Usuário:</label>
+                        <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId" readonly></select>
+                        <input type="hidden" asp-for="UsuarioId" value="@ViewBag.UsuarioIdDefault" />
+                        <span asp-validation-for="UsuarioId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="HasProjeto" class="control-label">Possui projeto?</label>
+                        <input asp-for="HasProjeto" type="checkbox" class="form-control" id="hasProjetoCheckbox" />
+                        <span asp-validation-for="HasProjeto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2" id="projetoSelectDiv">
+                        <label asp-for="ProjetoId" class="control-label">Projeto</label>
+                        <select asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId">
+                            <option value="">Selecione um Projeto</option>
+                        </select>
+                        <span asp-validation-for="ProjetoId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group ">
+                <label class="control-label">Materiais</label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Material</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="materialTableBody">
+                        @for (int i = 0; i < Model.MovimentacaoMaterial.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                   <select class="form-control" name="materiaisIds">
+                                        @foreach (var material in ViewBag.Materiais as SelectList)
+                                        {
+                                            var isSelected = material.Value == Model.MovimentacaoMaterial.ElementAt(i).MaterialId.ToString() ? true : false;
+                                            @if (isSelected)
+                                            {
+                                                <option value="@material.Value">@material.Text</option>
+                                            }
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="quantidades"
+                                    value="@Model.MovimentacaoMaterial.ElementAt(i).Quantidade.ToString()" />
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" onclick="removeMaterialRow(this)">Remover</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-secondary" onclick="addMaterialRow()">Adicionar Material</button>
+            </div>
+
+            <div class="form-group mb-3 text-center">
+                <input type="submit" value="Editar" class="btn btn-success" /> |
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function addMaterialRow() {
+            var row = '<tr>' +
+                      '<td><select class="form-control" name="materiaisIds">' +
+                      '@foreach (var material in ViewBag.Materiais as SelectList) { <option value="@material.Value">@material.Text</option> }' +
+                      '</select></td>' +
+                      '<td><input type="number" class="form-control" name="quantidades" /></td>' +
+                      '<td><button type="button" class="btn btn-danger" onclick="removeMaterialRow(this)">Remover</button></td>' +
+                      '</tr>';
+            document.getElementById('materialTableBody').insertAdjacentHTML('beforeend', row);
+        }
+
+        function removeMaterialRow(button) {
+            var row = button.closest('tr');
+            row.parentNode.removeChild(row);
+        }
+
+
+        $(document).ready(function () {
+            toggleProjetoSelect();
+
+            $('#hasProjetoCheckbox').change(function () {
+                toggleProjetoSelect();
+            });
+
+            function toggleProjetoSelect() {
+                if ($('#hasProjetoCheckbox').is(':checked')) {
+                    $('#projetoSelectDiv').show();
+                } else {
+                    $('#projetoSelectDiv').hide();
+                    $('#projetoSelectDiv select').val('');
+                }
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(function (input) {
+                input.addEventListener('change', function (event) {
+                    var value = parseFloat(event.target.value.replace(',', '.')).toFixed(2);
+                    event.target.value = value.replace('.', ',');
+                });
+            });
+        });
+    </script>
+}
+
+
+
+
+@*
+    
+select da linha 75 ou proximas
+
+<select class="form-control" name="materiaisIds" value="@Model.MovimentacaoMaterial[i].MaterialId">
+                                        @foreach (var material in ViewBag.Materiais as SelectList)
+                                        {
+                                            <option value="@material.Value" @(material.Value == Model.MovimentacaoMaterial[i].MaterialId.ToString() ? "selected" : "")>@material.Text</option>
+                                        }
+                                    </select> *@
+
+
+@*
+    
+editar - com problema do foreach mas com add material até bonitinho
+
+
+<div class="container d-flex justify-content-center">
+    <div class="w-75">
+
+      
+
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
@@ -31,25 +203,152 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label asp-for="UsuarioId" class="control-label">Usuário: </label>
-                        <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
+                    <div class="form-group mb-2">
+                        <label asp-for="UsuarioId" class="control-label">Usuário:</label>
+                        <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId" readonly></select>
+                        <input type="hidden" asp-for="UsuarioId" value="@ViewBag.UsuarioIdDefault" />
+                        <span asp-validation-for="UsuarioId" class="text-danger"></span>
                     </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="ProjetoId" class="control-label">Projeto: </label>
-                        <select asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId"></select>
+                    @*  <div class="form-group mb-2">
+                    <label asp-for="ProjetoId" class="control-label">Projeto: </label>
+                    <select asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId"></select>
+                    <span asp-validation-for="ProjetoId" class="text-danger"></span>
+                    </div> *
+                    <div class="form-group mb-2">
+                        <label asp-for="HasProjeto" class="control-label">Possui projeto?</label>
+                        <input asp-for="HasProjeto" type="checkbox" class="form-control" id="hasProjetoCheckbox" />
+                        <span asp-validation-for="HasProjeto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2" id="projetoSelectDiv">
+                        <label asp-for="ProjetoId" class="control-label"></label>
+                        <select asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId">
+                            <option value="">Selecione um Projeto</option>
+                        </select>
+                        <span asp-validation-for="ProjetoId" class="text-danger"></span>
                     </div>
                 </div>
             </div>
+
+            <div class="form-group mb-3">
+                <h5>Materiais:</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Material</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="materiaisTableBody">
+                        <!-- As linhas dos materiais serão adicionadas via JavaScript -->
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-primary" id="addMaterialBtn">Adicionar Material</button>
+            </div>
+
             <div class="form-group mb-3 text-center">
                 <input type="submit" value="Editar" class="btn btn-success" /> |
                 <a asp-action="Index" class="btn btn-secondary">Voltar</a>
             </div>
-        </form>
+        </form> 
     </div>
 </div>
 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+    <script>
+        document.getElementById('addMaterialBtn').addEventListener('click', function () {
+            var materiaisTableBody = document.getElementById('materiaisTableBody');
+            var newRow = document.createElement('tr');
+
+            newRow.innerHTML = `
+                                <td>
+                                   <select name="MovimentacaoMaterial_MaterialId" class="form-control">
+                                       
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="MovimentacaoMaterial_Quantidade" class="form-control" />
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger removeMaterialBtn">Remover</button>
+                                </td>
+                            `;
+            materiaisTableBody.appendChild(newRow);
+
+            // Adicionar evento de remoção à nova linha
+            newRow.querySelector('.removeMaterialBtn').addEventListener('click', function () {
+                newRow.remove();
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            toggleProjetoSelect();
+
+            $('#hasProjetoCheckbox').change(function () {
+                toggleProjetoSelect();
+            });
+
+            function toggleProjetoSelect() {
+                if ($('#hasProjetoCheckbox').is(':checked')) {
+                    $('#projetoSelectDiv').show();
+                } else {
+                    $('#projetoSelectDiv').hide();
+                    $('#projetoSelectDiv select').val('');
+                }
+            }
+        });
+    </script>
+} *@
+
+
+@* @foreach (var material in (SelectList)ViewBag.Materiais)
+{
+    <option value="@material.Value">@material.Text</option>
+} *@
+
+
+@*  
+    
+teste 1
+
+<form asp-action="Edit">
+            <div class="form-group">
+                <label asp-for="Responsavel" class="control-label"></label>
+                <input asp-for="Responsavel" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoMovimentacao" class="control-label"></label>
+                <select asp-for="TipoMovimentacao" class="form-control" asp-items="Html.GetEnumSelectList<TipoMovimentacao>()"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DtMovimentacao" class="control-label"></label>
+                <input asp-for="DtMovimentacao" class="form-control" />
+            </div>
+
+            <div id="movimentacaoMateriais">
+                <h4>Materiais</h4>
+                @{
+                    var materiaisList = Model.MovimentacaoMaterial.ToList();
+                }
+                @for (int i = 0; i < materiaisList.Count; i++)
+                {
+                    <div class="form-group">
+                        <label>Material</label>
+                        <select class="form-control" asp-items="ViewBag.Materiais" name="MovimentacaoMateriais[@i].MaterialId" value="@materiaisList[i].MaterialId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantidade</label>
+                        <input class="form-control" name="MovimentacaoMateriais[@i].Quantidade" value="@materiaisList[i].Quantidade" />
+                    </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form> *@

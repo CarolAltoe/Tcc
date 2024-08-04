@@ -1,20 +1,17 @@
-﻿
-
-
-
-@model tcc_core.Models.UsuarioModel
+﻿@model tcc_core.Models.Usuario
 
 @{
     ViewData["Title"] = "Editar Usuário";
 }
 
-<h1 class=" text-center">@ViewData["Title"]</h1>
+<h1 class="text-center">@ViewData["Title"]</h1>
 <hr />
 
 <div class="row justify-content-center">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <input type="hidden" asp-for="Id" /> 
             <div class="form-group mb-3">
                 <label asp-for="NomeCompleto" class="control-label">Nome Completo:</label>
                 <input asp-for="NomeCompleto" class="form-control" />
@@ -26,21 +23,45 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
+                <label asp-for="Cpf" class="control-label">CPF:</label>
+                <input asp-for="Cpf" class="form-control" />
+                <span asp-validation-for="Cpf" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
                 <label asp-for="Senha" class="control-label">Senha:</label>
                 <input asp-for="Senha" class="form-control" />
                 <span asp-validation-for="Senha" class="text-danger"></span>
+            </div> 
+           @*  <div class="form-group mb-3">
+                <input type="checkbox" asp-for="DesejaAlterarSenha" id="desejaAlterarSenhaCheckbox" />
+                <label asp-for="DesejaAlterarSenha">Deseja alterar a senha?</label>
             </div>
+            <div class="form-group mb-3" id="novaSenhaField" style="display:none;">
+                <label asp-for="NovaSenha" class="control-label">Nova Senha:</label>
+                <input asp-for="NovaSenha" class="form-control" />
+                <span asp-validation-for="NovaSenha" class="text-danger"></span>
+            </div> *@
+
+
             <br />
             <div class="form-group mb-3 text-center">
                 <input type="submit" value="Editar" class="btn btn-success" /> |
-                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a> |
+                <a asp-controller="Usuario" asp-action="ChangePassword" class="btn btn-danger">Alterar Senha</a>
             </div>
         </form>
     </div>
 </div>
 
-
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.getElementById("desejaAlterarSenhaCheckbox").addEventListener("change", function () {
+            var novaSenhaField = document.getElementById("novaSenhaField");
+            novaSenhaField.style.display = this.checked ? "block" : "none";
+        });
+    </script>
 }

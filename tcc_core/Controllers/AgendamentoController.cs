@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using tcc_core.Models;
 
 namespace tcc_core.Controllers
 {
+    [Authorize]
     public class AgendamentoController : Controller
     {
         private readonly AppDbContext _context;
@@ -20,10 +22,29 @@ namespace tcc_core.Controllers
         }
 
         // GET: Agendamento
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            var appDbContext = _context.Agendamento.Include(a => a.Projeto).Include(a => a.Usuario);
-            return View(await appDbContext.ToListAsync());
+            ViewData["CurrentFilter"] = searchTerm;
+
+            var agendamentos = from m in _context.Agendamento
+                 .Include(a => a.Projeto).Include(a => a.Usuario)
+                 select m;
+
+            if (!String.IsNullOrEmpty(searchTerm))
+            {
+                agendamentos = agendamentos.Where(s =>
+                    s.ResponsavelExterno.Contains(searchTerm) ||
+                    s.ResponsavelInterno.Contains(searchTerm));
+            }
+
+            var agendamentoList = await agendamentos.ToListAsync();
+            if (!agendamentoList.Any())
+            {
+                ViewData["Message"] = !String.IsNullOrEmpty(searchTerm) ?
+                                      "Nenhum agendamento encontrado para o termo pesquisado." :
+                                      "Nenhum agendamento cadastrado.";
+            }
+            return View(await agendamentos.ToListAsync());
         }
 
         // GET: Agendamento/Details/5
@@ -46,21 +67,35 @@ namespace tcc_core.Controllers
             return View(agendamento);
         }
 
-        // GET: Agendamento/Create
+        [Authorize]
         public IActionResult Create()
         {
+            var email = User.Identity.Name;
+            var usuario = _context.Usuario.FirstOrDefault(u => u.Email == email);
+
+            if (usuario == null)
+            {
+                // Tratar o caso de usuário não encontrado, se necessário
+            }
+
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo");
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", usuario?.Id);
+            ViewBag.UsuarioIdDefault = usuario?.Id;
+
             return View();
         }
 
         // POST: Agendamento/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ResponsavelInterno,ResponsavelExterno,Turma,Descricao,Feedback,Observacoes,DtInicial,DtFinal,QtdPessoas,ProjetoId,UsuarioId")] Agendamento agendamento)
+        public async Task<IActionResult> Create([Bind("Id,ResponsavelInterno,ResponsavelExterno,Turma,Descricao," +
+    "Feedback,Observacoes,DtInicial,DtFinal,QtdPessoas,ProjetoId,UsuarioId,HasProjeto")] Agendamento agendamento)
         {
+            if (!agendamento.HasProjeto)
+            {
+                agendamento.ProjetoId = null;
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(agendamento);
@@ -93,28 +128,26 @@ namespace tcc_core.Controllers
         // POST: Agendamento/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Agendamento/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ResponsavelInterno,ResponsavelExterno,Turma," +
-            "Descricao,Feedback,Observacoes,DtInicial,DtFinal,QtdPessoas,ProjetoId,UsuarioId")] Agendamento agendamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ResponsavelInterno," +
+            "ResponsavelExterno,Turma," +
+            "Descricao,Feedback,Observacoes,DtInicial,DtFinal,QtdPessoas,ProjetoId," +
+            "UsuarioId,HasProjeto")] Agendamento agendamento)
         {
             if (id != agendamento.Id)
             {
                 return NotFound();
             }
 
+            if (!agendamento.HasProjeto)
+            {
+                agendamento.ProjetoId = null;
+            }
+
             if (ModelState.IsValid)
             {
-                var projeto = await _context.Projeto.FindAsync(agendamento.ProjetoId);
-                var usuario = await _context.Usuario.FindAsync(agendamento.UsuarioId);
-
-                if (projeto == null || usuario == null)
-                {
-                    ModelState.AddModelError("", "Projeto ou Usuário não encontrado");
-                    ViewData["ProjetoId"] = new SelectList(_context.Projeto, "Id", "Titulo", agendamento.ProjetoId);
-                    ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NomeCompleto", agendamento.UsuarioId);
-                    return View(agendamento);
-                }
                 try
                 {
                     _context.Update(agendamento);

@@ -1,42 +1,66 @@
-﻿ @model tcc_core.Models.UsuarioModel
+﻿@model tcc_core.Models.Usuario
 
 @{
-    ViewData["Title"] = "Cadastrar Usuário";
+    ViewData["Title"] = "Registre-se";
 }
 
-<h1 class=" text-center">@ViewData["Title"]</h1>
+<h1 class="text-center">@ViewData["Title"]</h1>
 <hr />
 
-<div class="row justify-content-center">
-    <div class="col-md-4">
+<div class="container d-flex justify-content-center">
+    <div class="w-75">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group mb-3">
-                <label asp-for="NomeCompleto" class="control-label">Nome Completo:</label>
-                <input asp-for="NomeCompleto" class="form-control" />
-                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="NomeCompleto" class="control-label">Nome Completo:</label>
+                        <input asp-for="NomeCompleto" class="form-control" />
+                        <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label asp-for="Email" class="control-label">E-mail:</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @*<div class="form-group mb-3">
+                         <label class="m-3">
+                            ** Defina um código ou palavra chave para recuperação de senha.
+                        </label>
+                        <label class="m-3">
+                            Obs.: Guarde esse código pois ele sem ele não será possível recuperar a senha futuramente.
+                        </label>
+                       
+                       
+                        <label asp-for="Cpf" class="control-label">Código de Verificação: </label>
+                        <input asp-for="Cpf" class="form-control" />
+                        <span asp-validation-for="Cpf" class="text-danger"></span>
+                        </div> *@
+                    <div class="form-group mb-3">
+                        <label asp-for="Cpf" class="control-label">CPF:</label>
+                        <input asp-for="Cpf" class="form-control" />
+                        <span asp-validation-for="Cpf" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Senha" class="control-label">Senha:</label>
+                        <input asp-for="Senha" class="form-control" type="password" />
+                        <span asp-validation-for="Senha" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group mb-3">
-                <label asp-for="Email" class="control-label">E-mail:</label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="Senha" class="control-label">Senha:</label>
-                <input asp-for="Senha" class="form-control" type="password" />
-                <span asp-validation-for="Senha" class="text-danger"></span>
-            </div>
+
             <br />
             <div class="form-group mb-3 text-center">
-                <input type="submit" value="Cadastrar" class="btn btn-success" /> |
-                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                <input type="submit" value="Registrar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
- 

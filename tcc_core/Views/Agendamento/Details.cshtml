@@ -30,11 +30,23 @@
                     <dt class="col-sm-4 text-start">Quantidade de pessoas:</dt>
                     <dd class="col-sm-8 text-end">@Html.DisplayFor(model => model.QtdPessoas)</dd>
 
-                    <dt class="col-sm-4 text-start">Projeto:</dt>
-                    <dd class="col-sm-8 text-end">@Html.DisplayFor(model => model.Projeto.Id)</dd>
+                    <dt class="col-sm-4 text-start">Possui projeto? </dt>
+                    <dd class="col-sm-8 text-end">
+                        @Html.DisplayFor(model => model.HasProjeto)
+                    </dd>
+
+                    @if (Model.HasProjeto)
+                    {
+                        <dt class="col-sm-4 text-start">
+                            @Html.DisplayNameFor(model => model.Projeto.Titulo)
+                        </dt>
+                        <dd class="col-sm-8 text-end">
+                            @Html.DisplayFor(model => model.Projeto.Titulo)
+                        </dd>
+                    }
 
                     <dt class="col-sm-4 text-start">Usuário:</dt>
-                    <dd class="col-sm-8 text-end">@Html.DisplayFor(model => model.Usuario.Id)</dd>
+                    <dd class="col-sm-8 text-end">@Html.DisplayFor(model => model.Usuario.NomeCompleto)</dd>
                 </dl>
             </div>
             <div class="col-md-6">

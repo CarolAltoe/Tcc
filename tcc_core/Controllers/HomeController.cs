@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using tcc_core.Models;
+using tcc_core.Models.ViewModels;
 
 namespace tcc_core.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -28,5 +30,16 @@ namespace tcc_core.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Help()
+        {
+            return View();
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
     }
 }

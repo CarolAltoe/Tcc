@@ -11,13 +11,12 @@ namespace tcc_core.Data
         {
         }
 
-        public DbSet<UsuarioModel> Usuario { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Projeto> Projeto { get; set; }
         public DbSet<Agendamento> Agendamento { get; set; }
         public DbSet<Material> Material { get; set; }
         public DbSet<Movimentacao> Movimentacao { get; set; }
         public DbSet<MovimentacaoMaterial> MovimentacaoMaterial{ get; set; }
-        public DbSet<UserTeste> UserTestes{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

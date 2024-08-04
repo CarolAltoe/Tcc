@@ -23,7 +23,14 @@
                 </div>
                 <div class="form-group mb-3">
                     <label asp-for="Natureza" class="control-label">Natureza:</label>
-                    <input asp-for="Natureza" class="form-control" />
+                   @*  <input asp-for="Natureza" class="form-control" /> *@
+                    <select asp-for="Natureza" class="form-control">
+                        <option value="">Selecione</option>
+                        @foreach (var item in Enum.GetValues(typeof(tcc_core.Models.Enuns.NaturezaProjeto)))
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
                     <span asp-validation-for="Natureza" class="text-danger"></span>
                 </div>
             </div>

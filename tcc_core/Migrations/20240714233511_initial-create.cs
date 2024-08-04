@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace tcc_core.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,7 +22,7 @@ namespace tcc_core.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Descricao = table.Column<string>(type: "longtext", nullable: false),
-                    Classificacao = table.Column<string>(type: "longtext", nullable: false),
+                    Classificacao = table.Column<int>(type: "int", nullable: false),
                     QuantidadeAtual = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
@@ -37,8 +37,9 @@ namespace tcc_core.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Titulo = table.Column<string>(type: "longtext", nullable: false),
                     Coordenador = table.Column<string>(type: "longtext", nullable: false),
-                    Natureza = table.Column<string>(type: "longtext", nullable: false),
+                    Natureza = table.Column<int>(type: "int", nullable: false),
                     DtInicio = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DtFinal = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
@@ -56,6 +57,7 @@ namespace tcc_core.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     NomeCompleto = table.Column<string>(type: "longtext", nullable: false),
                     Email = table.Column<string>(type: "longtext", nullable: false),
+                    Cpf = table.Column<string>(type: "longtext", nullable: false),
                     Senha = table.Column<string>(type: "longtext", nullable: false)
                 },
                 constraints: table =>
@@ -74,12 +76,13 @@ namespace tcc_core.Migrations
                     ResponsavelExterno = table.Column<string>(type: "longtext", nullable: false),
                     Turma = table.Column<string>(type: "longtext", nullable: false),
                     Descricao = table.Column<string>(type: "longtext", nullable: false),
-                    Feedback = table.Column<string>(type: "longtext", nullable: false),
-                    Observacoes = table.Column<string>(type: "longtext", nullable: false),
+                    Feedback = table.Column<string>(type: "longtext", nullable: true),
+                    Observacoes = table.Column<string>(type: "longtext", nullable: true),
                     DtInicial = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DtFinal = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     QtdPessoas = table.Column<int>(type: "int", nullable: false),
-                    ProjetoId = table.Column<int>(type: "int", nullable: false),
+                    HasProjeto = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ProjetoId = table.Column<int>(type: "int", nullable: true),
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -90,13 +93,13 @@ namespace tcc_core.Migrations
                         column: x => x.ProjetoId,
                         principalTable: "Projeto",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Agendamento_Usuario_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuario",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -107,10 +110,11 @@ namespace tcc_core.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Responsavel = table.Column<string>(type: "longtext", nullable: false),
-                    TipoMovimentacao = table.Column<string>(type: "longtext", nullable: false),
+                    TipoMovimentacao = table.Column<int>(type: "int", nullable: false),
                     DtMovimentacao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    HasProjeto = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    ProjetoId = table.Column<int>(type: "int", nullable: false)
+                    ProjetoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -120,13 +124,13 @@ namespace tcc_core.Migrations
                         column: x => x.ProjetoId,
                         principalTable: "Projeto",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Movimentacao_Usuario_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuario",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 

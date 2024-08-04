@@ -1,4 +1,86 @@
-﻿@model IEnumerable<tcc_core.Models.UsuarioModel>
+﻿
+@model IEnumerable<tcc_core.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuários";
+    var usuarioLogado = ViewBag.UsuarioLogado as tcc_core.Models.Usuario;
+}
+<br />
+
+<h2>Meu Perfil</h2>
+
+<div class="d-flex justify-content-between">
+    <div>
+        <h6>Nome completo: @usuarioLogado.NomeCompleto</h6>
+        <h6>E-mail: @usuarioLogado.Email</h6>
+    </div>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@usuarioLogado.Id" class="btn btn-dark">Editar</a>
+        <a asp-action="Details" asp-route-id="@usuarioLogado.Id" class="btn btn-secondary">Ver detalhes</a>
+        <a asp-action="Delete" asp-route-id="@usuarioLogado.Id" class="btn btn-danger">Excluir</a>
+    </div>
+</div>
+
+<hr />
+
+<div class="d-flex justify-content-between m-2 pt-2 pb-2">
+    <h4>@ViewData["Title"]</h4>
+    <form asp-action="Index" method="get">
+        <p>
+            <input type="text" name="searchTerm" value="@ViewData["CurrentFilter"]" placeholder="Pesquisar..." />
+            <input type="submit" value="Pesquisar" class="btn btn-success" />
+            <a asp-action="Index" class="btn btn-secondary">Limpar</a>
+        </p>
+    </form>
+</div>
+
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-info">@ViewData["Message"]</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table text-center">
+            <thead>
+                <tr >
+                    <th>Nome Completo</th>
+                    <th>E-mail </th>
+                   @*  <th>Ações</th> *@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @if (item.Id != usuarioLogado.Id)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NomeCompleto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+
+                            @* <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">Editar</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Ver detalhes</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Excluir</a>
+                            </td> *@
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+}
+ @*    
+
+ primeira abordagem inicial - comentado para não perder
+
+
+           @model IEnumerable<tcc_core.Models.Usuario>
 
 @{
     ViewData["Title"] = "Usuários";
@@ -39,3 +121,10 @@
         </tbody>
     </table>
 </div>
+
+
+
+
+
+
+                    *@

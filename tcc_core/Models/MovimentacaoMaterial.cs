@@ -7,11 +7,13 @@ namespace tcc_core.Models
     {
         [Key, Column(Order = 0)]
         public int MovimentacaoId { get; set; }
-        public Movimentacao Movimentacao { get; set; }
+        public Movimentacao? Movimentacao { get; set; }
 
         [Key, Column(Order = 1)]
         public int MaterialId { get; set; }
-        public Material Material { get; set; } 
+        public Material? Material { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
 
         public decimal Quantidade { get; set; }
     }

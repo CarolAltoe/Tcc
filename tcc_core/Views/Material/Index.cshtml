@@ -7,42 +7,61 @@
 <h1>@ViewData["Title"]</h1>
 <hr />
 
-<p>
-    <a asp-action="Create" class="btn btn-success">Adicionar</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Descrição
-            </th>
-            <th>
-                Classificação
-            </th>
-            <th>
-                Quantidade atual
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Classificacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantidadeAtual)
-            </td>
-             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Ver detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Excluir</a>
-            </td>
-        </tr>
+<div class="d-flex justify-content-between m-2 pt-2 pb-2">
+    <p>
+        <a asp-action="Create" class="btn btn-success">Adicionar</a>
+    </p>
+
+    <form asp-action="Index" method="get">
+        <p>
+            <input type="text" name="searchTerm" value="@ViewData["CurrentFilter"]" placeholder="Pesquisar..." />
+            <input type="submit" value="Pesquisar" class="btn btn-success" />
+            <a asp-action="Index" class="btn btn-secondary">Limpar</a>
+        </p>
+    </form>
+</div>
+
+
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-info">@ViewData["Message"]</div>
 }
-    </tbody>
-</table>
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Descrição
+                </th>
+                <th>
+                    Classificação
+                </th>
+                <th>
+                    Quantidade atual
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classificacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantidadeAtual)
+                </td>
+                 <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Ver detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Excluir</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+}

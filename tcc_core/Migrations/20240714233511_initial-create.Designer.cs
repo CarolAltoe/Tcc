@@ -11,15 +11,15 @@ using tcc_core.Data;
 namespace tcc_core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240520152538_UpdateDb")]
-    partial class UpdateDb
+    [Migration("20240714233511_initial-create")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.18")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("tcc_core.Models.Agendamento", b =>
@@ -40,6 +40,9 @@ namespace tcc_core.Migrations
 
                     b.Property<string>("Feedback")
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("HasProjeto")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Observacoes")
                         .HasColumnType("longtext");
@@ -80,9 +83,8 @@ namespace tcc_core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Classificacao")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("Classificacao")
+                        .HasColumnType("int");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -105,6 +107,9 @@ namespace tcc_core.Migrations
                     b.Property<DateTime>("DtMovimentacao")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("HasProjeto")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int?>("ProjetoId")
                         .HasColumnType("int");
 
@@ -112,9 +117,8 @@ namespace tcc_core.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("TipoMovimentacao")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("TipoMovimentacao")
+                        .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -131,10 +135,12 @@ namespace tcc_core.Migrations
             modelBuilder.Entity("tcc_core.Models.MovimentacaoMaterial", b =>
                 {
                     b.Property<int>("MovimentacaoId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
 
                     b.Property<int>("MaterialId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     b.Property<decimal>("Quantidade")
                         .HasColumnType("decimal(18,2)");
@@ -162,9 +168,8 @@ namespace tcc_core.Migrations
                     b.Property<DateTime>("DtInicio")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Natureza")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("Natureza")
+                        .HasColumnType("int");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
@@ -175,34 +180,15 @@ namespace tcc_core.Migrations
                     b.ToTable("Projeto");
                 });
 
-            modelBuilder.Entity("tcc_core.Models.UserTeste", b =>
+            modelBuilder.Entity("tcc_core.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Cpf")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Senha")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserTestes");
-                });
-
-            modelBuilder.Entity("tcc_core.Models.UsuarioModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -228,7 +214,7 @@ namespace tcc_core.Migrations
                         .HasForeignKey("ProjetoId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("tcc_core.Models.UsuarioModel", "Usuario")
+                    b.HasOne("tcc_core.Models.Usuario", "Usuario")
                         .WithMany("Agendamento")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -246,7 +232,7 @@ namespace tcc_core.Migrations
                         .HasForeignKey("ProjetoId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("tcc_core.Models.UsuarioModel", "Usuario")
+                    b.HasOne("tcc_core.Models.Usuario", "Usuario")
                         .WithMany("Movimentacao")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -293,7 +279,7 @@ namespace tcc_core.Migrations
                     b.Navigation("Movimentacao");
                 });
 
-            modelBuilder.Entity("tcc_core.Models.UsuarioModel", b =>
+            modelBuilder.Entity("tcc_core.Models.Usuario", b =>
                 {
                     b.Navigation("Agendamento");
 

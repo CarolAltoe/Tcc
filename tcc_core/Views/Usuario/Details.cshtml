@@ -1,4 +1,4 @@
-﻿@model tcc_core.Models.UsuarioModel
+﻿@model tcc_core.Models.Usuario
 
 @{
     ViewData["Title"] = "Detalhes do Usuário";
@@ -17,8 +17,8 @@
             <dt class="col-sm-4 text-start">E-mail:</dt>
             <dd class="col-sm-8 text-end text-decoration-none">@Html.DisplayFor(model => model.Email)</dd>
 
-          @*   <dt class="col-sm-4 text-start">Senha:</dt>
-            <dd class="col-sm-8 text-end">@Html.DisplayFor(model => model.Senha)</dd> *@
+            <dt class="col-sm-4 text-start">CPF:</dt>
+            <dd class="col-sm-8 text-end">@Html.DisplayFor(model => model.Cpf)</dd>
         </dl>
     </div>
 </div>

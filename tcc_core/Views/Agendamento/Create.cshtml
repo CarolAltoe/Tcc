@@ -44,30 +44,43 @@
                         <span asp-validation-for="QtdPessoas" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-2">
-                        <label asp-for="UsuarioId" class="control-label">Usuário: </label>
-                        <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
+                        <label asp-for="UsuarioId" class="control-label">Usuário:</label>
+                        <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId" disabled="disabled"></select>
+                        <input type="hidden" asp-for="UsuarioId" value="@ViewBag.UsuarioIdDefault" />
                         <span asp-validation-for="UsuarioId" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group mb-2">
+                   @*  <div class="form-group mb-2">
                         <label asp-for="ProjetoId" class="control-label">Projeto: </label>
                         <select asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId"></select>
+                        <span asp-validation-for="ProjetoId" class="text-danger"></span>
+                    </div> *@
+                    <div class="form-group mb-2">
+                        <label asp-for="HasProjeto" class="control-label">Possui projeto?</label>
+                        <input asp-for="HasProjeto" type="checkbox" class="form-control" id="hasProjetoCheckbox" />
+                        <span asp-validation-for="HasProjeto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2" id="projetoSelectDiv">
+                        <label asp-for="ProjetoId" class="control-label"></label>
+                        <select asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId">
+                            <option value="">Selecione um Projeto</option>
+                        </select>
                         <span asp-validation-for="ProjetoId" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-2">
                         <label asp-for="Descricao" class="control-label">Descrição:</label>
-                        <textarea asp-for="Descricao" class="form-control" rows="4"></textarea>
+                        <textarea asp-for="Descricao" class="form-control" rows="3"></textarea>
                         <span asp-validation-for="Descricao" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-2">
                         <label asp-for="Feedback" class="control-label">Feedback: </label>
-                        <textarea asp-for="Feedback" class="form-control" rows="4"></textarea>
+                        <textarea asp-for="Feedback" class="form-control" rows="3"></textarea>
                         <span asp-validation-for="Feedback" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-2">
                         <label asp-for="Observacoes" class="control-label">Observações: </label>
-                        <textarea asp-for="Observacoes" class="form-control" rows="4"></textarea>
+                        <textarea asp-for="Observacoes" class="form-control" rows="3"></textarea>
                         <span asp-validation-for="Observacoes" class="text-danger"></span>
                     </div>
                 </div>
@@ -85,4 +98,22 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        $(document).ready(function () {
+            toggleProjetoSelect();
+
+            $('#hasProjetoCheckbox').change(function () {
+                toggleProjetoSelect();
+            });
+
+            function toggleProjetoSelect() {
+                if ($('#hasProjetoCheckbox').is(':checked')) {
+                    $('#projetoSelectDiv').show();
+                } else {
+                    $('#projetoSelectDiv').hide();
+                    $('#projetoSelectDiv select').val('');
+                }
+            }
+        });
+    </script>
 }

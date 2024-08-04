@@ -18,9 +18,15 @@
                         <input asp-for="Responsavel" class="form-control" />
                         <span asp-validation-for="Responsavel" class="text-danger"></span>
                     </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="TipoMovimentacao" class="control-label">Tipo da movimentação:</label>
-                        <input asp-for="TipoMovimentacao" class="form-control" />
+                    <div class="form-group  mb-3">
+                        <label asp-for="TipoMovimentacao" class="control-label">Tipo de Movimentação</label>
+                        <select asp-for="TipoMovimentacao" class="form-control">
+                            <option value="">Selecione</option>
+                            @foreach (var item in Enum.GetValues(typeof(tcc_core.Models.Enuns.TipoMovimentacao)))
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
                         <span asp-validation-for="TipoMovimentacao" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
@@ -30,31 +36,52 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label asp-for="UsuarioId" class="control-label">Usuário: </label>
-                        <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
+                    <div class="form-group mb-2">
+                        <label asp-for="UsuarioId" class="control-label">Usuário:</label>
+                        <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId" disabled="disabled"></select>
+                        <input type="hidden" asp-for="UsuarioId" value="@ViewBag.UsuarioIdDefault" />
+                        <span asp-validation-for="UsuarioId" class="text-danger"></span>
                     </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="ProjetoId" class="control-label">Projeto: </label>
-                        <select asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId"></select>
+                    <div class="form-group mb-2">
+                        <label asp-for="HasProjeto" class="control-label">Possui projeto?</label>
+                        <input asp-for="HasProjeto" type="checkbox" class="form-control" id="hasProjetoCheckbox" />
+                        <span asp-validation-for="HasProjeto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2" id="projetoSelectDiv">
+                        <label asp-for="ProjetoId" class="control-label">Projeto</label>
+                        <select asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId">
+                            <option value="">Selecione um Projeto</option>
+                        </select>
+                        <span asp-validation-for="ProjetoId" class="text-danger"></span>
                     </div>
                 </div>
             </div>
-            <div class="form-group mb-3">
-                <h5>Materiais:</h5>
+            <div class="form-group">
+                <label class="control-label">Materiais</label>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Material</th>
                             <th>Quantidade</th>
-                            <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="materiaisTableBody">
-                        <!-- As linhas dos materiais serão adicionadas via JavaScript -->
+                    <tbody id="materialTableBody">
+                        <tr>
+                            <td>
+                                <select class="form-control" name="materiaisIds">
+                                    @foreach (var material in ViewBag.Materiais)
+                                    {
+                                        <option value="@material.Value">@material.Text</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" name="quantidades" />
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-primary" id="addMaterialBtn">Adicionar Material</button>
+                <button type="button" class="btn btn-secondary" onclick="addMaterialRow()">Adicionar Material</button>
             </div>
             <div class="form-group mb-3 text-center">
                 <input type="submit" value="Cadastrar" class="btn btn-success" /> |
@@ -69,32 +96,63 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script>
-        document.getElementById('addMaterialBtn').addEventListener('click', function () {
-            var materiaisTableBody = document.getElementById('materiaisTableBody');
-            var newRow = document.createElement('tr');
+        function addMaterialRow() {
+            var row = `<tr>
+                        <td><select class="form-control" name="materiaisIds">
+        @foreach (var material in ViewBag.Materiais)
+        {
+                                    <option value="@material.Value">@material.Text</option>
+        }
+                        </select></td>
+                        <td><input type="number" class="form-control" name="quantidades" /></td>
+                    </tr>`;
+            document.getElementById('materialTableBody').insertAdjacentHTML('beforeend', row);
+        }
 
-            newRow.innerHTML = `
-                        <td>
-                            <select name="MovimentacaoMaterial_MaterialId" class="form-control">
-                                @foreach (var material in (SelectList)ViewBag.Materiais)
-                                {
-                                   <option value="@material.Value">@material.Text</option>
-                                }
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" name="MovimentacaoMaterial_Quantidade" class="form-control" />
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger removeMaterialBtn">Remover</button>
-                        </td>
-                    `;
-            materiaisTableBody.appendChild(newRow);
+        $(document).ready(function () {
+            toggleProjetoSelect();
 
-            // Adicionar evento de remoção à nova linha
-            newRow.querySelector('.removeMaterialBtn').addEventListener('click', function () {
-                newRow.remove();
+            $('#hasProjetoCheckbox').change(function () {
+                toggleProjetoSelect();
             });
+
+            function toggleProjetoSelect() {
+                if ($('#hasProjetoCheckbox').is(':checked')) {
+                    $('#projetoSelectDiv').show();
+                } else {
+                    $('#projetoSelectDiv').hide();
+                    $('#projetoSelectDiv select').val('');
+                }
+            }
         });
     </script>
 }
+
+
+
+
+
+
+
+
+
+
+
+@*   <div class="form-group">
+                <label asp-for="HasProjeto" class="control-label"></label>
+                <input asp-for="HasProjeto" class="form-control" />
+                <span asp-validation-for="HasProjeto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjetoId" class="control-label"></label>
+                <input asp-for="ProjetoId" class="form-control" />
+                <span asp-validation-for="ProjetoId" class="text-danger"></span>
+            </div> *@
+
+
+
+
+
+
+
+                  

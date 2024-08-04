@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using tcc_core.Models;
 
 namespace tcc_core.Controllers
 {
+    [Authorize]
     public class ProjetoController : Controller
     {
         private readonly AppDbContext _context;
@@ -20,11 +22,27 @@ namespace tcc_core.Controllers
         }
 
         // GET: Projeto
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-              return _context.Projeto != null ? 
-                          View(await _context.Projeto.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Projeto'  is null.");
+            ViewData["CurrentFilter"] = searchTerm;
+
+            var projetos = from p in _context.Projeto
+                            select p;
+
+            if (!String.IsNullOrEmpty(searchTerm))
+            {
+                projetos = projetos.Where(s => s.Titulo.Contains(searchTerm));
+            }
+
+            var projetoList = await projetos.ToListAsync();
+            if (!projetoList.Any())
+            {
+                ViewData["Message"] = !String.IsNullOrEmpty(searchTerm) ?
+                                      "Nenhum projeto encontrado para o termo pesquisado." :
+                                      "Nenhum projeto cadastrado.";
+            }
+
+            return View(await projetos.ToListAsync());
         }
 
         // GET: Projeto/Details/5

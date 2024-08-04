@@ -37,5 +37,7 @@ Thumbs.db
 *.dylib
 *.pdb
 
-/.vs/tcc_core
-
+# .gitignore
+/tcc_core/obj/
+/tcc_core/bin/
+/.vs/

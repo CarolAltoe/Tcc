@@ -20,6 +20,7 @@ html {
 body {
     margin-bottom: 60px;
     background-color: #D9FBDD;
+    overflow-y: scroll;
 }
 
 .footer p {
@@ -27,3 +28,8 @@ body {
     white-space: normal;
 }
 
+
+
+.main-content {
+    min-height: 100vh; 
+}
