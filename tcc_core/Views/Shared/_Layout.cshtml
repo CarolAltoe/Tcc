@@ -21,13 +21,13 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <form method="post" asp-controller="Usuario" asp-action="Logout" class="form-inline">
-                            <button type="submit" class="btn btn-outline-danger ">Logout</button>
+                            <button type="submit" class="btn btn-outline-danger ">Sair</button>
                         </form> 
-                        <div class="dropdown ms-3">
+                        <div class="dropdown ms-3 ">
                             <button class="btn btn-outline-success" type="button" id="navbarScrollingDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="navbar-toggler-icon text-success"></span>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-end text-center " aria-labelledby="navbarScrollingDropdown">
+                            <ul class="dropdown-menu dropdown-menu-end text-center color-dropdown" aria-labelledby="navbarScrollingDropdown">
                                 <li class="nav-item">
                                     <a class="nav-link text-dark " asp-area="" asp-controller="Home" asp-action="Help">Procedimentos</a>
                                 </li>
@@ -46,15 +46,15 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Movimentacao" asp-action="Index">Movimentação</a>
                                 </li>
-                                <li class="nav-item">
+                               @*  <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="MovimentacaoMaterial" asp-action="Index">Movimentação - Material</a>
-                                </li>
+                                </li> *@
                             </ul>
                         </div>
                     }
                     else
                     {
-                        <a class="nav-link text-dark" asp-controller="Usuario" asp-action="Create">Register</a>
+                        <a class="nav-link text-dark" asp-controller="Usuario" asp-action="Create">Cadastre-se</a>
                         <a class="nav-link text-dark" asp-controller="Usuario" asp-action="Login">Login</a>
                     }
 
@@ -63,14 +63,14 @@
         </nav>
     </header>
     <div class="container ">
-        <main role="main" class="pb-3 main-content">
+        <main role="main" class="pb-3">
             @RenderBody()
-            @if (TempData["SuccessMessage"] != null)
+        @*     @if (TempData["SuccessMessage"] != null)
             {
                 <div class="alert alert-success">
                     @TempData["SuccessMessage"]
                 </div>
-            }
+            } *@
 
         </main>
     </div>

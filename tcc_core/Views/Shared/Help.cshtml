@@ -5,55 +5,55 @@
 }
 
 <h1 class="text-center">@ViewData["Title"]</h1>
-<hr />
+<br />
 
 <div class="row justify-content-center">
-    <div id="home">
-       <ul class="nav nav-tabs"> 
-          <li class="nav-item">
-            <a class="nav-link" href="#projeto" >Projeto</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#material" >Material</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#movimentacao" >Movimentação</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#agendamento" >Agendamento</a>
-          </li>
+    <div id="home" class="text-black">
+        <ul class="nav d-flex justify-content-evenly ">
+            <li class="">
+                <a class="btn btn-outline-secondary" href="#projeto">Projeto</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-secondary" href="#material">Material</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-secondary" href="#movimentacao">Movimentação</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-secondary" href="#agendamento">Agendamento</a>
+            </li>
         </ul>
    </div>
 
-   <div id="projeto" class="content">
-       <div class="d-flex justify-content-between">
+   <div id="projeto" class="content m-2">
+       <div class="d-flex justify-content-between m-2">
             <h3>Projeto</h3>
-            <a class="nav-link" href="#home">Home</a>
+            <a class="btn btn-outline-secondary" href="#home">Home</a>
        </div>
 
-        <ul>
-            <li>
+        <ol class="p-2">
+            <li class="m-2"> 
                 Para realizar ações referentes a Projetos, navegue para 
                 a página de gerenciamento de Projetos, cujo link pode ser encontrado
                 no menu lateral, na página Home ou clicando em 
                 <a asp-controller="Projeto" asp-action="Index">Projetos</a>
                 .
             </li>
-            <li>
+            <li class="m-2">
                 Para cadastrar um projeto no sistema, vá para a página de gerenciamento 
                 de projetos (link no item acima).
-                Clique no botão "Adicionar" para ser redirecionado para a página de criação de Projetos.
-                Nessa página, são solicitadas informações necessárias para cadastrar Projetos no sistema.
+                Clique no botão "Adicionar". Você será redirecionado para a página de criação de Projetos.
+                Nessa página, são solicitadas informações necessárias para cadastrar um Projeto no sistema.
                 Observação: O Projeto só será cadastrado no sistema se todos os campos obrigatórios
                 estiverem devidamente preenchidos e se não houver inconsistencia e
                 dublicidade de dados de caráter único.
             </li>
-            <li>
+            <li class="m-2">
                 Na página de gerenciamento é possível visualizar Projetos cadastrados no sistema. 
                 A esquerda ficam as informações referente ao projeto e a direita, botões,
                 que correspondem ações referentes ao respectivo Projeto.
             </li>
-            <li>
+            <li class="m-2">
                 Para editar o Projeto, clique no botão "Editar". Você
                 será redirecionado para a página de alteração do Projeto, que carrega as atuais
                 informações do Projeto, permitindo que as mesmas sejam alteradas.
@@ -61,174 +61,161 @@
                 estiverem devidamente preenchidos e se não houver inconsistencia e
                 dublicidade de dados de caráter único.
             </li>
-            <li>
+            <li class="m-2">
                 Para visualizar todas as informações referente a um projeto específico,
                 clique no botão "Ver Detalhes", localizado na página Index.
             </li>
-            <li>
+            <li class="m-2">
                 Para visualizar todas as informações referente a um projeto específico,
                 clique no botão "Ver Detalhes", localizado na página Index.
             </li>
-            <li>
+            <li class="m-2">
                 Para excluir um projeto específico, clique no botão "Excluir",
                 localizado na página Index. Você será redirecionado para uma página de 
                 confirmação, que exibe as informações relacionadas ao projeto selecionado.
             </li>
-        </ul>
+            <li class="m-2">
+                Antes de excluir um Projeto, confira as demais informações relacionadas
+                à ele. Certifique-se que o mesmo não esteja atrelado a nenhuma Movimentação
+                ou Agendamento.
+                Após a confirmação, todas as informações exibidas
+                anteriormente seão excluídas, não podendo ser recuperadas.
+            </li>
+        </ol>
    </div>
-   <div id="material" class="content">
-        <div class="d-flex justify-content-between">
+
+    <div id="material" class="content m-2">
+        <div class="d-flex justify-content-between m-2">
             <h3>Material</h3>
-            <a class="nav-link" href="#home">Home</a>
+            <a class="btn btn-outline-secondary" href="#home">Home</a>
         </div>
 
-        <ul>
-            <li>
-                Para realizar ações referentes a Materiais, o usuário deve navegar para
+        <ol class="p-2">
+            <li class="m-2">
+                Para realizar ações referentes a Materiais, navegue para
                 a página de gerenciamento de Materiais, cujo link pode ser encontrado
-                no menu lateral, na página Home ou clicando em 
+                no menu lateral, na página Home ou clicando em
                 <a asp-controller="Material" asp-action="Index">Materiais</a>
                 .
             </li>
-            <li>
-                Para cadastrar um projeto no sistema, vá para a página de gerenciamento
-                de projetos (link no item acima).
-                Clique no botão "Adicionar" para ser redirecionado para a página de criação de Projetos.
-                Nessa página, são solicitadas informações necessárias para cadastrar Projetos no sistema.
-                Observação: O Projeto só será cadastrado no sistema se todos os campos obrigatórios
-                estiverem devidamente preenchidos e se não houver inconsistencia e
-                dublicidade de dados de caráter único.
+            <li class="m-2">
+                Para gerenciar (cadastrar, alterar, visualizar ou excluir) 
+                Materiais no sistema, navegue para a tela indicada no item anterior e
+                repita os passos descritos na seção "Projeto", do item 2 ao item 7.
             </li>
-            <li>
-                Na página de gerenciamento é possível visualizar Projetos cadastrados no sistema.
-                A esquerda ficam as informações referente ao projeto e a direita, botões,
-                que correspondem ações referentes ao respectivo Projeto.
+            <li class="m-2">
+                Observação: todos os materias devem ser cadastrados com quantidade inicial 0
+                e deve-se informar a quantidade de materiais no estoque (entrada e saída)
+                ao registrar movimentações no sistema.
             </li>
-            <li>
-                Para editar o Projeto, clique no botão "Editar". Você
-                será redirecionado para a página de alteração do Projeto, que carrega as atuais
-                informações do Projeto, permitindo que as mesmas sejam alteradas.
-                Observação: As alterações só serão aplicadas os campos obrigatórios
-                estiverem devidamente preenchidos e se não houver inconsistencia e
-                dublicidade de dados de caráter único.
+            <li class="m-2">
+                Antes de excluir um Material, confira as demais informações relacionadas
+                à ele. Certifique-se que o mesmo não esteja atrelado a nenhuma Movimentação.
+                Após a confirmação, todas as informações exibidas
+                anteriormente seão excluídas, não podendo ser recuperadas.
             </li>
-            <li>
-                Para visualizar todas as informações referente a um projeto específico,
-                clique no botão "Ver Detalhes", localizado na página Index.
-            </li>
-            <li>
-                Para visualizar todas as informações referente a um projeto específico,
-                clique no botão "Ver Detalhes", localizado na página Index.
-            </li>
-            <li>
-                Para excluir um projeto específico, clique no botão "Excluir",
-                localizado na página Index. Você será redirecionado para uma página de
-                confirmação, que exibe as informações relacionadas ao projeto selecionado.
-            </li>
-        </ul>
+        </ol>
    </div>
-   <div id="movimentacao" class="content">
-        <div class="d-flex justify-content-between">
+
+    <div id="movimentacao" class="content m-2 ">
+        <div class="d-flex justify-content-between m-2">
             <h3>Movimentação</h3>
-            <a class="nav-link" href="#home">Home</a>
+            <a class="btn btn-outline-secondary" href="#home">Home</a>
         </div>
 
-        <ul>
-            <li>
-                Para realizar ações referentes a Movimentações, o usuário deve navegar para
+        <ol class="p-2">
+            <li class="m-2">
+                Para realizar ações referentes a Movimentações, navegue para
                 a página de gerenciamento de Movimentações, cujo link pode ser encontrado
-                no menu lateral, na página Home ou clicando em 
+                no menu lateral, na página Home ou clicando em
                 <a asp-controller="Movimentacao" asp-action="Index">Movimentações</a>
                 .
             </li>
-            <li>
-                Para cadastrar um projeto no sistema, vá para a página de gerenciamento
-                de projetos (link no item acima).
-                Clique no botão "Adicionar" para ser redirecionado para a página de criação de Projetos.
-                Nessa página, são solicitadas informações necessárias para cadastrar Projetos no sistema.
-                Observação: O Projeto só será cadastrado no sistema se todos os campos obrigatórios
-                estiverem devidamente preenchidos e se não houver inconsistencia e
-                dublicidade de dados de caráter único.
+            <li class="m-2">
+                Para gerenciar (cadastrar, alterar, visualizar ou excluir)
+                Movimentações no sistema, navegue para a tela indicada no item anterior e
+                repita os passos descritos na seção "Projeto", do item 2 ao item 7.
             </li>
-            <li>
-                Na página de gerenciamento é possível visualizar Projetos cadastrados no sistema.
-                A esquerda ficam as informações referente ao projeto e a direita, botões,
-                que correspondem ações referentes ao respectivo Projeto.
+            <li class="m-2">
+                Antes de cadastrar ou alterar Movimentações, certifique-se de que:
+
+                <ul>
+                    <li class ="m-2">
+                        Caso a Movimentação esteja atrelada a um Projeto,
+                        verifique se o Projeto respectivo existe, antes de
+                        iniciar o cadastro ou alteração da Moviementação.
+                    </li>
+                    <li class="m-2">
+                        Certifique-se de que o Material será adicionado
+                        apenas uma vez (um registro apenas, podendo ter ou não X itens)
+                        por Moviemntação.
+                    </li>
+                    <li class="m-2">
+                        Certifique-se de que ao cadatrar ou alterar a quantidade
+                        de um Material atrelado a uma Movimentação, use sempre ","
+                        (vírgula) para valores decimais.
+                    </li>
+                </ul>
             </li>
-            <li>
-                Para editar o Projeto, clique no botão "Editar". Você
-                será redirecionado para a página de alteração do Projeto, que carrega as atuais
-                informações do Projeto, permitindo que as mesmas sejam alteradas.
-                Observação: As alterações só serão aplicadas os campos obrigatórios
-                estiverem devidamente preenchidos e se não houver inconsistencia e
-                dublicidade de dados de caráter único.
+            <li class="m-2">
+                Antes de excluir uma Movimentação, confira as demais informações atreladas
+                à ela. Após a confirmação, todas as informações exibidas
+                anteriormente seão excluídas, não podendo ser recuperadas.
             </li>
-            <li>
-                Para visualizar todas as informações referente a um projeto específico,
-                clique no botão "Ver Detalhes", localizado na página Index.
-            </li>
-            <li>
-                Para visualizar todas as informações referente a um projeto específico,
-                clique no botão "Ver Detalhes", localizado na página Index.
-            </li>
-            <li>
-                Para excluir um projeto específico, clique no botão "Excluir",
-                localizado na página Index. Você será redirecionado para uma página de
-                confirmação, que exibe as informações relacionadas ao projeto selecionado.
-            </li>
-        </ul>
+        </ol>
    </div>
-   <div id="agendamento" class="content">
-        <div class="d-flex justify-content-between">
+
+    <div id="agendamento" class="content m-2">
+        <div class="d-flex justify-content-between m-2">
             <h3>Agendamento</h3>
-            <a class="nav-link" href="#home">Home</a>
+            <a class="btn btn-outline-secondary" href="#home">Home</a>
         </div>
-        
-        <ul>
-            <li>
-                Para realizar ações referentes a Agendamentos, o usuário deve navegar para
-                a página de gerenciamento de Agendamentos, cujo link pode ser encontrado
-                no menu lateral, na página Home ou clicando em 
+     
+        <ol class="p-2">
+            <li class="m-2">
+                Para realizar ações referentes aos Agendamentos, navegue para
+                a página de gerenciamento de Agendamento, cujo link pode ser encontrado
+                no menu lateral, na página Home ou clicando em
                 <a asp-controller="Agendamento" asp-action="Index">Agendamentos</a>
                 .
             </li>
-            <li>
-                Para cadastrar um projeto no sistema, vá para a página de gerenciamento
-                de projetos (link no item acima).
-                Clique no botão "Adicionar" para ser redirecionado para a página de criação de Projetos.
-                Nessa página, são solicitadas informações necessárias para cadastrar Projetos no sistema.
-                Observação: O Projeto só será cadastrado no sistema se todos os campos obrigatórios
-                estiverem devidamente preenchidos e se não houver inconsistencia e
-                dublicidade de dados de caráter único.
+            <li class="m-2">
+                Para gerenciar (cadastrar, alterar, visualizar ou excluir)
+                Agendamentos no sistema, navegue para a tela indicada no item anterior e
+                repita os passos descritos na seção "Projeto", do item 2 ao item 7.
             </li>
-            <li>
-                Na página de gerenciamento é possível visualizar Projetos cadastrados no sistema.
-                A esquerda ficam as informações referente ao projeto e a direita, botões,
-                que correspondem ações referentes ao respectivo Projeto.
+            <li class="m-2">
+                Antes de cadastrar ou alterar Agendamentos, certifique-se de que:
+
+                <ul>
+                    <li class ="m-2">
+                        Caso o Agendamento esteja atrelada a um Projeto,
+                        verifique se o Projeto respectivo existe, antes de
+                        iniciar o cadastro ou alteração da Agendamento.
+                    </li>
+                    <li class="m-2">
+                        Antes de cadatrar ou alterar um Agendamento, confira se há Materiais
+                        (equipamentos e bens de consumo) disponíveis para atender quem solicita o Agendamento.
+                    </li>
+                    <li class="m-2">
+                        Antes de cadatrar ou alterar um Agendamento, certifique-se de a quantidade
+                        de pessoas previstas para cada marcação, não ultrapasse o limite de capacidade do laboratório. 
+                    </li>
+                    <li class="m-2">
+                        Certifique-se de que as datas e horários agendados sejam
+                        coerentes com os eventos e atividades previstos para o laboratório,
+                        bem como que todas as informações obrigatórias sejam preenchidas de acordo.
+                    </li>
+                </ul>
             </li>
-            <li>
-                Para editar o Projeto, clique no botão "Editar". Você
-                será redirecionado para a página de alteração do Projeto, que carrega as atuais
-                informações do Projeto, permitindo que as mesmas sejam alteradas.
-                Observação: As alterações só serão aplicadas os campos obrigatórios
-                estiverem devidamente preenchidos e se não houver inconsistencia e
-                dublicidade de dados de caráter único.
+            <li class="m-2">
+                Antes de excluir um Agendamento, confira as demais informações atreladas
+                a ele. Após a confirmação, todas as informações exibidas
+                anteriormente seão excluídas, não podendo ser recuperadas.
             </li>
-            <li>
-                Para visualizar todas as informações referente a um projeto específico,
-                clique no botão "Ver Detalhes", localizado na página Index.
-            </li>
-            <li>
-                Para visualizar todas as informações referente a um projeto específico,
-                clique no botão "Ver Detalhes", localizado na página Index.
-            </li>
-            <li>
-                Para excluir um projeto específico, clique no botão "Excluir",
-                localizado na página Index. Você será redirecionado para uma página de
-                confirmação, que exibe as informações relacionadas ao projeto selecionado.
-            </li>
-        </ul>
+        </ol>
    </div>
+
 </div>
 
 

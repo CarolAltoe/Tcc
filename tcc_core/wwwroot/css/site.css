@@ -33,3 +33,11 @@ body {
 .main-content {
     min-height: 100vh; 
 }
+
+.color-dropdown {
+    background-color: #D9FBDD;
+}
+
+.color-botton-a{
+    color: gray;
+}

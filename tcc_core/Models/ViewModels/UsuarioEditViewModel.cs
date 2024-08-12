@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace tcc_core.Models
+namespace tcc_core.Models.ViewModels
 {
-     public class Usuario
+    public class UsuarioEditViewModel
     {
-        [Key]
         public int Id { get; set; }
+
         [Required(ErrorMessage = "O nome completo é obrigatório.")]
         public string NomeCompleto { get; set; } = string.Empty;
 
@@ -17,11 +16,9 @@ namespace tcc_core.Models
         [Required(ErrorMessage = "O CPF é obrigatório.")]
         public string Cpf { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "A senha é obrigatória.")]
-        //[DataType(DataType.Password)]
-        public string Senha { get; set; } = string.Empty;
+        [DataType(DataType.Password)]
+        public string? NovaSenha { get; set; } = string.Empty;
 
-        public ICollection<Agendamento>? Agendamento { get; set; } = new List<Agendamento>();
-        public ICollection<Movimentacao>? Movimentacao { get; set; } = new List<Movimentacao>();
+
     }
 }

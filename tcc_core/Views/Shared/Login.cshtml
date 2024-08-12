@@ -23,11 +23,10 @@
                 <span asp-validation-for="Senha" class="text-danger"></span>
             </div>
             <br />
-            <div class="form-group mb-3 text-center">
-                <input type="submit" value="Entrar" class="btn btn-success" /> |
-                <a asp-controller="Usuario" asp-action="Create" class="btn btn-secondary">Registre-se</a> |
-                <a asp-controller="Usuario" asp-action="ResetPassword" class="btn btn-secondary">Redefinir Senha</a>
-
+            <div class="form-group mb-3 text-center  d-flex justify-content-evenly">
+                <input type="submit" value="Entrar" class="btn btn-dark" /> 
+                <a asp-controller="Usuario" asp-action="Create" class="btn btn-success">Cadastre-se</a> @*  |
+                <a asp-controller="Usuario" asp-action="ResetPassword" class="btn btn-secondary">Redefinir Senha</a> *@
             </div>
         </form>
     </div>

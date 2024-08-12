@@ -41,8 +41,6 @@ namespace tcc_core.Controllers
 
             var usuarios = _context.Usuario
                 .Where(u => u.Email != email);
-                // select m;
-            //.Where(u => u.Email != email) // Excluindo o usuário logado da lista
 
             if (!String.IsNullOrEmpty(searchTerm))
             {
@@ -92,12 +90,6 @@ namespace tcc_core.Controllers
                 return NotFound();
             }
 
-           /* if (User.Identity.Name != usuario.Email)
-            {
-                ViewBag.Cpf = "Acesso restrito";
-            }
-           */
-
             if (User.Identity.Name != usuario.Email)
             {
                 return RedirectToAction("AccessDenied", "Home");
@@ -132,9 +124,9 @@ namespace tcc_core.Controllers
             }
 
             var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, usuario.Email)
-        };
+            {
+                new Claim(ClaimTypes.Name, usuario.Email)
+            };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var authProperties = new AuthenticationProperties
@@ -178,117 +170,52 @@ namespace tcc_core.Controllers
             return View(usuario);
         }
 
-        // GET: Usuario/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Usuario == null)
-            {
-                return NotFound();
-            }
 
-            var usuario = await _context.Usuario.FindAsync(id);
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var usuario = _context.Usuario.Find(id);
             if (usuario == null)
             {
                 return NotFound();
             }
-
-            if (User.Identity.Name != usuario.Email)
+            var viewModel = new UsuarioEditViewModel
             {
-                return RedirectToAction("AccessDenied", "Home");
-            }
-            return View(usuario);
+                Id = usuario.Id,
+                NomeCompleto = usuario.NomeCompleto,
+                Email = usuario.Email,
+                Cpf = usuario.Cpf,
+                // Outros campos necessários
+            };
+            return View(viewModel);
         }
 
-        // POST: Usuario/Edit/5
-         [HttpPost]
-          [ValidateAntiForgeryToken]
-          public async Task<IActionResult> Edit(int id, 
-              [Bind("Id,NomeCompleto,Email,Cpf,Senha")] Usuario usuario)
-          {
-              if (id != usuario.Id)
-              {
-                  return NotFound();
-              }
-
-              if (ModelState.IsValid)
-              {
-                  try
-                  {
-                      _context.Update(usuario);
-                      await _context.SaveChangesAsync();
-                  }
-                  catch (DbUpdateConcurrencyException)
-                  {
-                      if (!usuarioExists(usuario.Id))
-                      {
-                          return NotFound();
-                      }
-                      else
-                      {
-                          throw;
-                      }
-                  }
-                  return RedirectToAction(nameof(Index));
-              }
-             /* else
-              {
-                  // Log ModelState errors
-                  var errors = ModelState.Values.SelectMany(v => v.Errors);
-                  foreach (var error in errors)
-                  {
-                      Console.WriteLine(error.ErrorMessage);
-                  }
-              }**/
-              return View(usuario);
-          }
-
-       /* [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeCompleto,Email,Cpf,DesejaAlterarSenha,NovaSenha")] Usuario usuario)
+        public IActionResult Edit(UsuarioEditViewModel viewModel)
         {
-            if (id != usuario.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                var usuario = _context.Usuario.Find(viewModel.Id);
+                if (usuario == null)
                 {
-                    var userToUpdate = await _context.Usuario.FindAsync(id);
-                    if (userToUpdate == null)
-                    {
-                        return NotFound();
-                    }
-
-                    userToUpdate.NomeCompleto = usuario.NomeCompleto;
-                    userToUpdate.Email = usuario.Email;
-                    userToUpdate.Cpf = usuario.Cpf;
-
-                    // Atualize a senha apenas se o usuário deseja alterar
-                    if (usuario.DesejaAlterarSenha && !string.IsNullOrEmpty(usuario.NovaSenha))
-                    {
-                        userToUpdate.Senha = usuario.NovaSenha;
-                    }
-
-                    _context.Update(userToUpdate);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+
+                usuario.NomeCompleto = viewModel.NomeCompleto;
+                usuario.Email = viewModel.Email;
+                usuario.Cpf = viewModel.Cpf;
+
+                if (!string.IsNullOrEmpty(viewModel.NovaSenha))
                 {
-                    if (!usuarioExists(usuario.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    usuario.Senha = BCrypt.Net.BCrypt.HashPassword(viewModel.NovaSenha); // Supondo que você está usando bcrypt para hashear as senhas
                 }
+
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            return View(usuario);
-        } */
+            return View(viewModel);
+        }
 
 
 
@@ -339,10 +266,6 @@ namespace tcc_core.Controllers
         {
           return (_context.Usuario?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-
-
-
-
 
         [HttpGet]
         public IActionResult ChangePassword()
