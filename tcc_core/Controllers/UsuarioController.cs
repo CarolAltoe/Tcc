@@ -32,7 +32,7 @@ namespace tcc_core.Controllers
             }
 
             var usuarioLogado = await _context.Usuario
-                .FirstOrDefaultAsync(m => m.Email == email);
+                .FirstOrDefaultAsync(m => m.Email == email && !m.IsActive);
 
             if (usuarioLogado == null)
             {
@@ -40,7 +40,7 @@ namespace tcc_core.Controllers
             }
 
             var usuarios = _context.Usuario
-                .Where(u => u.Email != email);
+                .Where(u => u.Email != email && !u.IsActive);
 
             if (!String.IsNullOrEmpty(searchTerm))
             {
@@ -115,7 +115,8 @@ namespace tcc_core.Controllers
             }
 
             var usuario = _context.Usuario
-                .FirstOrDefault(u => u.Email == model.Email && u.Senha == model.Senha);
+                .FirstOrDefault(u => u.Email == model.Email 
+                && u.Senha == model.Senha && !u.IsActive);
 
             if (usuario == null)
             {
@@ -249,6 +250,10 @@ namespace tcc_core.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var usuario = await _context.Usuario.FindAsync(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
             var movimentacaoAssociada = _context.Movimentacao.Any(m => m.UsuarioId == id);
             var agendamentoAssociado = _context.Agendamento.Any(m => m.UsuarioId == id);
 
@@ -263,15 +268,27 @@ namespace tcc_core.Controllers
                    " este usuário, pois está associado a um agendamento.");
             }
 
-            if (!ModelState.IsValid)
+            if (movimentacaoAssociada || agendamentoAssociado)
             {
                 return View(usuario);
             }
 
-            if (usuario != null)
+            var emailLogado = User.Identity.Name;
+
+            if (usuario.Email == emailLogado)
             {
-                _context.Usuario.Remove(usuario);
+                // Marcar o usuário como excluído
+                usuario.IsActive = true;
+                _context.Update(usuario);
                 await _context.SaveChangesAsync();
+
+                // Deslogar o usuário
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                // Redirecionar para a página de login com uma mensagem de confirmação
+                TempData["SuccessMessage"] = "Seu perfil foi desativado com sucesso. " +
+                    "Para ativar novamente contate o administrador do sistema.";
+                return RedirectToAction(nameof(Login), "Usuario");
             }
             
             return RedirectToAction(nameof(Index));

@@ -3,10 +3,19 @@
 
 @{
     ViewData["Title"] = "Login";
+    var successMessage = TempData["SuccessMessage"] as string;
 }
 
 <h1 class="text-center">@ViewData["Title"]</h1>
 <hr />
+
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success">
+        @successMessage
+    </div>
+}
 
 <div class="row justify-content-center">
     <div class="col-md-4">

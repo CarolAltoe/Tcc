@@ -191,6 +191,9 @@ namespace tcc_core.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("NomeCompleto")
                         .IsRequired()
                         .HasColumnType("longtext");

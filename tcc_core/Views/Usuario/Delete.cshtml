@@ -32,9 +32,15 @@
 </div>
 
 <div class="text-center mt-4 d-flex justify-content-evenly">
-    <form asp-action="Delete">
+    <form asp-action="Delete" onsubmit="return confirmDelete();">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Excluir" class="btn btn-danger" /> |
         <a asp-action="Index" class="btn btn-secondary ml-2">Voltar</a>
     </form>
 </div>
+
+<script>
+    function confirmDelete() {
+        return confirm("Você tem certeza que deseja excluir seu próprio perfil?");
+    }
+</script>

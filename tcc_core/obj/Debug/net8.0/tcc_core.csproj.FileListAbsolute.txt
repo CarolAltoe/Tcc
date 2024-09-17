@@ -297,11 +297,9 @@ C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Microsoft.VisualSt
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
-C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\MySql.Data.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\MySql.EntityFrameworkCore.dll
-C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\MySqlConnector.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\NuGet.Common.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\NuGet.Configuration.dll
@@ -312,7 +310,6 @@ C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\NuGet.Packaging.dl
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\NuGet.ProjectModel.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\NuGet.Protocol.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\NuGet.Versioning.dll
-C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -323,7 +320,6 @@ C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\System.Composition
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\System.Composition.Runtime.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\System.Composition.TypedParts.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
-C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\System.Drawing.Common.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\System.Reflection.MetadataLoadContext.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\System.Security.Permissions.dll
@@ -468,15 +464,11 @@ C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\ru\Microsoft.CodeA
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\runtimes\win-x64\native\comerr64.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\runtimes\win-x64\native\gssapi64.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\runtimes\win-x64\native\k5sprt64.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\runtimes\win-x64\native\krb5_64.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
-C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
-C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\obj\Debug\net8.0\tcc_core.csproj.AssemblyReference.cache
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\obj\Debug\net8.0\tcc_core.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\obj\Debug\net8.0\tcc_core.AssemblyInfoInputs.cache
@@ -506,3 +498,4 @@ C:\Users\maria\Documents\GitHub\Tcc\tcc_core\obj\Debug\net8.0\refint\tcc_core.dl
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\obj\Debug\net8.0\tcc_core.pdb
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\obj\Debug\net8.0\tcc_core.genruntimeconfig.cache
 C:\Users\maria\Documents\GitHub\Tcc\tcc_core\obj\Debug\net8.0\ref\tcc_core.dll
+C:\Users\maria\Documents\GitHub\Tcc\tcc_core\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
