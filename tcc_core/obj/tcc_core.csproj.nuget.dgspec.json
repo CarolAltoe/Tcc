@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\tcc_core.csproj": {}
+    "C:\\Users\\maria\\Documents\\GitHub\\Tcc\\tcc_core\\tcc_core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\tcc_core.csproj": {
+    "C:\\Users\\maria\\Documents\\GitHub\\Tcc\\tcc_core\\tcc_core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\tcc_core.csproj",
+        "projectUniqueName": "C:\\Users\\maria\\Documents\\GitHub\\Tcc\\tcc_core\\tcc_core.csproj",
         "projectName": "tcc_core",
-        "projectPath": "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\tcc_core.csproj",
-        "packagesPath": "C:\\Users\\Note191\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Note191\\Repos\\Tcc\\tcc_core\\obj\\",
+        "projectPath": "C:\\Users\\maria\\Documents\\GitHub\\Tcc\\tcc_core\\tcc_core.csproj",
+        "packagesPath": "C:\\Users\\maria\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maria\\Documents\\GitHub\\Tcc\\tcc_core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Note191\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maria\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -108,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

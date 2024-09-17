@@ -159,17 +159,32 @@ namespace tcc_core.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Projeto == null)
-            {
-                return Problem("Entity set 'AppDbContext.Projeto'  is null.");
-            }
             var projeto = await _context.Projeto.FindAsync(id);
+            var movimentacaoAssociada = _context.Movimentacao.Any(m => m.ProjetoId == id);
+            var agendamentoAssociado = _context.Agendamento.Any(m => m.ProjetoId == id);
+
+            if (movimentacaoAssociada)
+            {
+                ModelState.AddModelError("", "Não é possível excluir" +
+                    " este projeto, pois está associado a uma movimentação.");
+            }
+            if (agendamentoAssociado)
+            {
+                ModelState.AddModelError("", "Não é possível excluir" +
+                   " este projeto, pois está associado a um agendamento.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(projeto);
+            }
+
             if (projeto != null)
             {
                 _context.Projeto.Remove(projeto);
+                await _context.SaveChangesAsync();
             }
             
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

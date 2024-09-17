@@ -159,17 +159,21 @@ namespace tcc_core.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Material == null)
-            {
-                return Problem("Entity set 'AppDbContext.Material'  is null.");
-            }
             var material = await _context.Material.FindAsync(id);
+            var movimentacaoAssociada = _context.Movimentacao.Any(m => m.Id == id);
+            if (movimentacaoAssociada)
+            {
+                ModelState.AddModelError("", "Não é possível excluir este material," +
+                    " pois está associado a uma movimentação.");
+                return View(material);
+            }
+
             if (material != null)
             {
                 _context.Material.Remove(material);
+                await _context.SaveChangesAsync();
             }
             
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

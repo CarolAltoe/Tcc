@@ -10,6 +10,13 @@
 
 <div class="container d-flex justify-content-center">
     <div class="w-75">
+        <!-- Exibe as mensagens de erro gerais -->
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            </div>
+        }
         <hr />
         <dl class="row ">
             <dt class="col-sm-4 text-start">Nome Completo:</dt>
