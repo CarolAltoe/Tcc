@@ -28,6 +28,12 @@
     <h4>@ViewData["Title"]</h4>
     <form asp-action="Index" method="get">
         <p>
+            @* <label>
+                <input type="checkbox" name="mostrarInativos" value="true"
+                @(ViewData["MostrarInativos"] != null
+                    && (bool)ViewData["MostrarInativos"] ? "checked" : "") />
+                Mostrar inativos
+            </label> *@
             <input type="text" name="searchTerm" value="@ViewData["CurrentFilter"]" placeholder="Pesquisar..." />
             <input type="submit" value="Pesquisar" class="btn btn-success" />
             <a asp-action="Index" class="btn btn-secondary">Limpar</a>

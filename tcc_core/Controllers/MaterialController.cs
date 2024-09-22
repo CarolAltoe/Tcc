@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using tcc_core.Data;
 using tcc_core.Models;
@@ -22,19 +17,19 @@ namespace tcc_core.Controllers
         }
 
         // GET: Material
-        public async Task<IActionResult> Index(string searchTerm)
+        public async Task<IActionResult> Index(string searchTerm, bool mostrarInativos = false)
         {
             ViewData["CurrentFilter"] = searchTerm;
+            ViewData["MostrarInativos"] = mostrarInativos;
 
-            var materials = from m in _context.Material
-                            select m;
+            var materiais = _context.Material.Where(m => m.IsAtivo || mostrarInativos);
 
             if (!String.IsNullOrEmpty(searchTerm))
             {
-                materials = materials.Where(s => s.Descricao.Contains(searchTerm));
+                materiais = materiais.Where(s => s.Descricao.Contains(searchTerm));
             }
 
-            var materialList = await materials.ToListAsync();
+            var materialList = await materiais.ToListAsync();
             if (!materialList.Any())
             {
                 ViewData["Message"] = !String.IsNullOrEmpty(searchTerm) ?
@@ -42,7 +37,7 @@ namespace tcc_core.Controllers
                                       "Nenhum material cadastrado.";
             }
 
-            return View(await materials.ToListAsync());
+            return View(materialList);
         }
 
         // GET: Material/Details/5
@@ -170,7 +165,9 @@ namespace tcc_core.Controllers
 
             if (material != null)
             {
-                _context.Material.Remove(material);
+                //_context.Material.Remove(material);
+                material.IsAtivo = false;
+                _context.Update(material);
                 await _context.SaveChangesAsync();
             }
             
@@ -180,6 +177,22 @@ namespace tcc_core.Controllers
         private bool MaterialExists(int id)
         {
           return (_context.Material?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Ativar(int id)
+        {
+            var material = await _context.Material.FindAsync(id);
+            if (material == null)
+            {
+                return NotFound();
+            }
+            material.IsAtivo = true; // Marcar como ativo
+            _context.Update(material);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

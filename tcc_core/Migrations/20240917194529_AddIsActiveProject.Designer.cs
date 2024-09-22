@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tcc_core.Data;
 
@@ -10,9 +11,11 @@ using tcc_core.Data;
 namespace tcc_core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240917194529_AddIsActiveProject")]
+    partial class AddIsActiveProject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,9 +89,6 @@ namespace tcc_core.Migrations
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<bool>("IsAtivo")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<decimal>("QuantidadeAtual")
                         .HasColumnType("decimal(18,2)");

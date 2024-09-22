@@ -22,13 +22,13 @@ namespace tcc_core.Controllers
         }
 
         // GET: Projeto
-        public async Task<IActionResult> Index(string searchTerm)
+        public async Task<IActionResult> Index(string searchTerm, bool showInativos = false)
         {
             ViewData["CurrentFilter"] = searchTerm;
+            ViewData["ShowInativos"] = showInativos;
 
-            var projetos = from p in _context.Projeto
-                            select p;
-
+            var projetos = _context.Projeto.Where(p => p.IsActive || showInativos);
+            
             if (!String.IsNullOrEmpty(searchTerm))
             {
                 projetos = projetos.Where(s => s.Titulo.Contains(searchTerm));
@@ -42,7 +42,7 @@ namespace tcc_core.Controllers
                                       "Nenhum projeto cadastrado.";
             }
 
-            return View(await projetos.ToListAsync());
+            return View(projetoList);
         }
 
         // GET: Projeto/Details/5
@@ -181,7 +181,9 @@ namespace tcc_core.Controllers
 
             if (projeto != null)
             {
-                _context.Projeto.Remove(projeto);
+                //_context.Projeto.Remove(projeto);
+                projeto.IsActive = false;
+                _context.Update(projeto);
                 await _context.SaveChangesAsync();
             }
             
@@ -191,6 +193,25 @@ namespace tcc_core.Controllers
         private bool ProjetoExists(int id)
         {
           return (_context.Projeto?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        // POST: Projeto/Ativar/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Ativar(int id)
+        {
+            var projeto = await _context.Projeto.FindAsync(id);
+            if (projeto == null)
+            {
+                return NotFound();
+            }
+
+            projeto.IsActive = true;
+            _context.Update(projeto);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Projeto ativado com sucesso.";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

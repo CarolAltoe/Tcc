@@ -24,6 +24,6 @@ namespace tcc_core.Models
         public ICollection<Agendamento>? Agendamento { get; set; } = new List<Agendamento>();
         public ICollection<Movimentacao>? Movimentacao { get; set; } = new List<Movimentacao>();
 
-        public bool IsActive { get; set; } = false;
+        public bool IsActive { get; set; } = true;
     }
 }

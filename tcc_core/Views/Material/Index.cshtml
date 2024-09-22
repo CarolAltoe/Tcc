@@ -14,6 +14,12 @@
 
     <form asp-action="Index" method="get">
         <p>
+            <label>
+                <input type="checkbox" name="mostrarInativos" value="true"
+                @(ViewData["MostrarInativos"] != null
+                    && (bool)ViewData["MostrarInativos"] ? "checked" : "") />
+                Mostrar inativos
+            </label>
             <input type="text" name="searchTerm" value="@ViewData["CurrentFilter"]" placeholder="Pesquisar..." />
             <input type="submit" value="Pesquisar" class="btn btn-success" />
             <a asp-action="Index" class="btn btn-secondary">Limpar</a>
@@ -40,6 +46,7 @@ else
                 <th>
                     Quantidade atual
                 </th>
+                <th>Status</th>
                 <th>
                     Ações
                 </th>
@@ -57,11 +64,21 @@ else
                 <td>
                     @Html.DisplayFor(modelItem => item.QuantidadeAtual)
                 </td>
-                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Ver detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Excluir</a>
-                </td>
+                <td>@(item.IsAtivo ? "Ativo" : "Inativo")</td>
+                    <td>
+                        @if (item.IsAtivo)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Ver detalhes</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Excluir</a>
+                        }
+                        else
+                        {
+                            <form asp-action="Ativar" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                <button type="submit">Ativar</button>
+                            </form>
+                        }
+                    </td>
             </tr>
     }
         </tbody>
