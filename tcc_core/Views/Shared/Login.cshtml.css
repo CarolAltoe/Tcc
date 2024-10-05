@@ -46,3 +46,99 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+
+/***********/
+
+.login-container {
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.login-content {
+    background-color: #fff;
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 400px;
+    max-width: 90%;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+        /* Focus State */
+        .form-group input:focus {
+            border-color: #e91e63; /* Cor de borda rosa ao focar */
+            outline: none;
+        }
+
+
+/* Register Link */
+.link-cadastrar {
+    display: block;
+    text-align: right;
+    margin-bottom: 20px;
+    color: #e91e63; /* Cor rosa */
+    text-decoration: none;
+}
+
+    .link-cadastrar:hover {
+        text-decoration: underline;
+    }
+
+/* Submit Button */
+.login-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #04652f;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    /* Hover Effect */
+    .login-button:hover {
+        background-color: #034922;
+    }
+
+/* Responsive Design */
+@media only screen and (max-width: 600px) {
+    .login-container {
+        padding: 20px 30px;
+        width: 100%;
+    }
+
+    .form-group input {
+        padding: 12px;
+    }
+
+    .login-button {
+        padding: 12px;
+        font-size: 14px;
+    }

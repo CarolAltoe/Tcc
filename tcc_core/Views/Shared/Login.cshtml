@@ -3,19 +3,69 @@
 
 @{
     ViewData["Title"] = "Login";
-    var successMessage = TempData["SuccessMessage"] as string;
 }
 
-<h1 class="text-center">@ViewData["Title"]</h1>
-<hr />
+<div class="login-container">
+    <div class="login-content">
+
+        <h1>Login</h1>
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label >E-mail:</label>
+                <input asp-for="Email" class="form-control" placeholder="Informe seu e-mail" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label>Senha:</label>
+                <input asp-for="Senha" class="form-control" type="password" placeholder="Informe sua senha" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+         
+            <div class="">
+                <span class="link-cadastrar">
+                    <a asp-controller="Usuario" asp-action="Create">Cadastre-se</a>
+                </span>
+            </div>
+
+            <input type="submit" value="Acessar" class="login-button" />
+        </form>
 
 
-@if (!string.IsNullOrEmpty(successMessage))
-{
-    <div class="alert alert-success">
-        @successMessage
+
+@* 
+    tentativa de estilizar bonitinho, mas o estilo não pega por causa da tag asp-for
+        <form asp-action="Login" class="login-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label >E-mail:</label>
+                <input placeholder="Informe seu e-mail" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Senha:</label>
+                <input placeholder="Informe sua senha" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+            <div class="form-footer">
+                <a href="#" class="forgot-password">Cadastre-se</a>
+            </div>
+
+            <!-- Submit Button -->
+            <input type="submit" class="login-button" value="Acessar" />
+
+        </form> *@
+
     </div>
-}
+
+</div>
+
+@* 
+
+tela verdona do início
+   
+<h1 class="text-center">@ViewData["Title"]</h1>
+<hr /> 
 
 <div class="row justify-content-center">
     <div class="col-md-4">
@@ -24,7 +74,6 @@
             <div class="form-group mb-3">
                 <label asp-for="Email" class="control-label">E-mail:</label>
                 <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
                 <label asp-for="Senha" class="control-label">Senha:</label>
@@ -35,11 +84,11 @@
             <div class="form-group mb-3 text-center  d-flex justify-content-evenly">
                 <input type="submit" value="Entrar" class="btn btn-dark" /> 
                 <a asp-controller="Usuario" asp-action="Create" class="btn btn-success">Cadastre-se</a> @*  |
-                <a asp-controller="Usuario" asp-action="ResetPassword" class="btn btn-secondary">Redefinir Senha</a> *@
+                <a asp-controller="Usuario" asp-action="ResetPassword" class="btn btn-secondary">Redefinir Senha</a> ***
             </div>
         </form>
     </div>
-</div>
+</div> *@
 
 @section Scripts {
     @{
